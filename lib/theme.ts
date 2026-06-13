@@ -25,6 +25,7 @@ export const NAV: NavItem[] = [
   { to: "/", label: "Home" },
   { to: "/work", label: "What we build" },
   { to: "/our-work", label: "Our Work" }, 
+  { to: "/products", label: "Our Products" },
   { to: "/results", label: "Results" },
   { to: "/process", label: "How it works" },
   { to: "/pricing", label: "Pricing" },
