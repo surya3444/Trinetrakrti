@@ -61,13 +61,23 @@ export const Rotator: React.FC<{ words: string[]; color: string }> = ({ words, c
 };
 
 export const BuildIcon: React.FC<{ name: BuildItem["icon"]; c: string }> = ({ name, c }) => {
-  const p = { width: 24, height: 24, fill: "none", stroke: c, strokeWidth: 1.7, strokeLinecap: "round", strokeLinejoin: "round" };
+  const p = { 
+    width: 24, 
+    height: 24, 
+    fill: "none", 
+    stroke: c, 
+    strokeWidth: 1.7, 
+    strokeLinecap: "round" as const,  // <-- Added 'as const'
+    strokeLinejoin: "round" as const  // <-- Added 'as const'
+  };
+  
   const m = {
     globe: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18" /></>,
     phone: <><rect x="7" y="3" width="10" height="18" rx="2.5" /><path d="M11 18h2" /></>,
     spark: <><path d="M12 3v5M12 16v5M3 12h5M16 12h5" /><circle cx="12" cy="12" r="2.5" /></>,
     tool: <><rect x="3" y="4" width="18" height="14" rx="2" /><path d="M3 9h18M8 14h5" /></>,
   };
+  
   return <svg viewBox="0 0 24 24" {...p}>{m[name]}</svg>;
 };
 
