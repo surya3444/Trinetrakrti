@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useReveal } from "@/hooks/useReveal";
 import { T, BUILDS } from "@/lib/theme";
 import { Container, SectionHead, Eyebrow, ArrowR, Check, Btn, Rotator, CountUp, BuildCard } from "@/components/ui/Shared";
-import { Trust, Testimonials, FAQ, FinalCTA } from "@/components/sections/SharedSections";
+import { Testimonials, FAQ, FinalCTA } from "@/components/sections/SharedSections";
 
 export default function Home() {
   useReveal();
@@ -37,7 +37,7 @@ export default function Home() {
       {/* NEW: Project Logos Scroller */}
       <ProjectLogos />
 
-      <Trust />
+
 
       <section style={{ padding: "90px 0 0" }}>
         <Container>
@@ -135,7 +135,7 @@ function ProjectLogos() {
     { name: "Campus Verse", logo: "/campusverse.svg", link: "https://campusverse.app" },
     { name: "OAAS", logo: "/oaas.png", link: "https://oaas.rajchavin.com" },
     { name: "Horticogen", logo: "/horticogen.png", link: "https://horticogen.com" },
-    { name: "Roopantara", logo: "/roopantara.png", link: "https://roopantara.com" },
+    { name: "trinetrakriti", logo: "/tot.png", link: "https://roopantara.com" },
     { name: "rajchavin", logo: "/rajchavin.png", link: "https://rajchavin.com" }
   ];
   
@@ -160,8 +160,8 @@ function ProjectLogos() {
               alignItems: "center", 
               justifyContent: "center",
               padding: "0 46px", 
-              filter: "grayscale(100%)", 
-              opacity: 0.5, 
+             // filter: "grayscale(100%)", 
+             // opacity: 0.5, 
               transition: "all .3s cubic-bezier(.2,.7,.2,1)",
               textDecoration: "none"
             }} 
@@ -170,11 +170,7 @@ function ProjectLogos() {
               e.currentTarget.style.opacity = "1"; 
               e.currentTarget.style.transform = "scale(1.05)";
             }} 
-            onMouseLeave={(e) => { 
-              e.currentTarget.style.filter = "grayscale(100%)"; 
-              e.currentTarget.style.opacity = "0.5"; 
-              e.currentTarget.style.transform = "scale(1)";
-            }}
+            
           >
             {/* Logo Container - floating without borders */}
             <div style={{ height: 44, width: 140, display: "grid", placeItems: "center" }}>

@@ -49,9 +49,7 @@ export function FAQ() {
     { q: "Do you build just one thing, or the whole stack?", a: "The whole stack. Website, app, AI automations and internal tools — built by one team so they actually talk to each other instead of becoming four disconnected projects." },
     { q: "How much does it cost?", a: "The first call is free. After it, you get a fixed-scope quote tied to a specific outcome — no open-ended hourly surprises. The Pricing page has starting points." },
     { q: "How fast can we see something real?", a: "We build MVP-first, so most projects put a working version in front of real users in weeks, not quarters. We'd rather ship small and improve than vanish for six months." },
-    { q: "Do we own the code?", a: "Completely. You own all the code, accounts and infrastructure. No lock-in, no hostage situations." },
-    { q: "What if we already have a team?", a: "We often work alongside in-house teams — handling the systems thinking, architecture and automations while they keep building. We make your team faster, not redundant." },
-  ];
+    ];
   const [open, setOpen] = useState(0);
   return (
     <section style={{ padding: "90px 0" }}>
@@ -110,6 +108,7 @@ export function Testimonials() {
   );
 }
 
+{/*
 export function Trust() {
   const items = ["Founder-led builds", "Fixed-scope quotes", "You own all the code", "MVP in weeks, not quarters", "No lock-in", "Outcomes, not output"];
   const loop = [...items, ...items];
@@ -121,3 +120,4 @@ export function Trust() {
     </div>
   );
 }
+  */}
