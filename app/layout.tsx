@@ -4,8 +4,8 @@ import { Footer } from "@/components/layout/Footer";
 import { MobileCTA } from "@/components/layout/MobileCTA";
 
 export const metadata = {
-  title: "Only Logic — Business Systems Studio",
-  description: "We build websites, apps, AI automations & internal tools — around your logic.",
+  title: "Trinetrakrti — Business Systems Studio",
+  description: "We build websites, apps, AI automations & internal tools — around how your business actually works.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

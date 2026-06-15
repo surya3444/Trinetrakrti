@@ -1,30 +1,43 @@
 "use client";
 import React from "react";
+import { useRouter } from "next/navigation";
 import { useReveal } from "@/hooks/useReveal";
-import { T, BUILDS } from "@/lib/theme";
-import { Container, BuildIcon } from "@/components/ui/Shared";
+import { T, SERVICES } from "@/lib/theme";
+import { Container, BuildIcon, ArrowR } from "@/components/ui/Shared";
 import { PageHero, FinalCTA } from "@/components/sections/SharedSections";
 
 export default function Work() {
   useReveal();
+  const router = useRouter();
   return (
     <main>
-      <PageHero eyebrow="What we build" title={<>Websites, apps, automations<br />and tools — built to work together.</>} sub="Pick the thing you need, or let us figure out the right mix on a call. Either way, it's one team building one connected system." />
-      <section style={{ padding: "12px 0 80px" }}>
+      <PageHero num="01" eyebrow="What we build" title={<>Fifteen capabilities,<br />one engineering team.</>} sub="Pick the thing you need, or let us figure out the right mix on a call. Either way, it's one team building one connected system." />
+      <section style={{ padding: "0 0 80px" }}>
         <Container>
-          {BUILDS.map((b, i) => (
-            <div key={b.t} className="ol-reveal" data-delay={i * 60} style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 26, padding: "30px 0", borderTop: `1px solid ${T.line2}`, alignItems: "start" }}>
-              <div style={{ width: 60, height: 60, borderRadius: 16, background: T.wash, border: `1px solid ${T.line}`, display: "grid", placeItems: "center", flexShrink: 0 }}><BuildIcon name={b.icon} c={T.coral} /></div>
-              <div>
-                <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}><h3 style={{ fontSize: 26, margin: 0, fontWeight: 700 }}>{b.t}</h3><span className="ol-mono" style={{ fontSize: 12, color: T.faint }}>0{i + 1}</span></div>
-                <p style={{ margin: "10px 0 14px", color: T.mute, fontSize: 17, lineHeight: 1.6, maxWidth: 640 }}>{b.d}</p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>{b.tags.map((t) => <span key={t} className="ol-mono" style={{ fontSize: 12.5, color: T.mute, background: T.wash, border: `1px solid ${T.line}`, padding: "6px 12px", borderRadius: 999 }}>{t}</span>)}</div>
-              </div>
-            </div>
-          ))}
+          <div style={{ borderTop: `2px solid ${T.fg}` }}>
+            {SERVICES.map((s, i) => (
+              <Row key={s.id} s={s} i={i} onClick={() => router.push("/book")} />
+            ))}
+          </div>
         </Container>
       </section>
       <FinalCTA />
     </main>
+  );
+}
+
+function Row({ s, i, onClick }: { s: typeof SERVICES[number]; i: number; onClick: () => void }) {
+  const [h, setH] = React.useState(false);
+  return (
+    <div className="ol-reveal" data-delay={(i % 8) * 40} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)} onClick={onClick}
+      style={{ display: "grid", gridTemplateColumns: "auto auto 1fr auto", gap: 26, padding: "26px 16px", borderBottom: `2px solid ${T.fg}`, alignItems: "center", cursor: "pointer", background: h ? T.fg : "transparent", color: h ? "#fff" : T.fg, transition: "background .15s ease-out, color .15s ease-out" }}>
+      <span className="ol-mono" style={{ fontSize: 13, fontWeight: 700, color: h ? "#fff" : T.accent, width: 28 }}>{`0${i + 1}`.slice(-2)}</span>
+      <div style={{ width: 48, height: 48, border: `2px solid ${h ? "#fff" : T.fg}`, display: "grid", placeItems: "center", flexShrink: 0 }}><BuildIcon name={s.icon} c={h ? "#fff" : T.fg} /></div>
+      <div>
+        <h3 style={{ fontSize: "clamp(20px,2.6vw,28px)", margin: 0, fontWeight: 800, textTransform: "uppercase", letterSpacing: "-.01em", lineHeight: 1 }}>{s.t}</h3>
+        <p style={{ margin: "8px 0 0", color: h ? "rgba(255,255,255,.8)" : T.mute, fontSize: 15, lineHeight: 1.5, maxWidth: 640 }} className="ol-row-desc">{s.d}</p>
+      </div>
+      <ArrowR s={22} />
+    </div>
   );
 }

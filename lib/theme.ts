@@ -1,19 +1,32 @@
+// Trinetrakrti — Swiss International Typographic Style tokens.
+// Brand-adapted: logo red accent + logo navy as near-black, on pure white.
+const bg = "#FFFFFF";
+const fg = "#17222F"; // near-black navy — text + visible borders
+const muted = "#F2F2F2"; // secondary background blocks
+const accent = "#E5322B"; // the only signal color
+
 export const T = {
-  paper: "#FCFBF8",
-  panel: "#FFFFFF",
-  wash: "#F4F2EC",
-  ink: "#13182B",
-  ink70: "#3A4257",
-  mute: "#6B7283",
+  // semantic (Swiss)
+  bg,
+  fg,
+  muted,
+  accent,
+  // legacy aliases (kept so every component resolves to a Swiss value)
+  paper: bg,
+  panel: bg,
+  wash: muted,
+  ink: fg,
+  ink70: "#2E3744",
+  mute: "#5A6473",
   faint: "#9AA0AD",
-  line: "#E5E2D9",
-  line2: "#D7D3C7",
-  blue: "#2B41E0",
-  blueSoft: "#5468F0",
-  blueWash: "#EDEFFF",
-  coral: "#FF5C49",
-  coralWash: "#FFEDE9",
-  green: "#0F9D6B",
+  line: fg,
+  line2: fg,
+  blue: accent,
+  blueSoft: accent,
+  blueWash: muted,
+  coral: accent,
+  coralWash: muted,
+  green: fg,
 };
 
 export interface NavItem {
@@ -24,7 +37,7 @@ export interface NavItem {
 export const NAV: NavItem[] = [
   { to: "/", label: "Home" },
   { to: "/work", label: "What we build" },
-  { to: "/our-work", label: "Our Work" }, 
+  { to: "/our-work", label: "Our Work" },
   { to: "/products", label: "Our Products" },
   { to: "/results", label: "Results" },
   { to: "/process", label: "How it works" },
@@ -32,17 +45,50 @@ export const NAV: NavItem[] = [
   { to: "/about", label: "About" },
 ];
 
+export type IconName =
+  | "globe"
+  | "phone"
+  | "spark"
+  | "tool"
+  | "palette"
+  | "code"
+  | "cloud"
+  | "chip"
+  | "cube"
+  | "chain"
+  | "bot"
+  | "data";
+
 export interface BuildItem {
   id: string;
   t: string;
-  icon: "globe" | "phone" | "spark" | "tool";
+  icon: IconName;
   d: string;
   tags: string[];
 }
 
-export const BUILDS: BuildItem[] = [
-  { id: "web", t: "Websites", icon: "globe", d: "Fast, modern sites that load quick, rank well and turn visitors into customers.", tags: ["Marketing sites", "Landing pages", "Web apps", "E-commerce"] },
-  { id: "app", t: "Apps", icon: "phone", d: "Web and mobile apps built to ship fast and scale calmly.", tags: ["iOS & Android", "Web apps", "SaaS platforms", "Customer portals"] },
-  { id: "ai", t: "AI automations", icon: "spark", d: "We hand the repetitive, copy-paste work to AI.", tags: ["Workflow automation", "AI assistants", "Support bots", "Data pipelines"] },
-  { id: "tools", t: "Internal tools", icon: "tool", d: "Dashboards and admin tools that replace spreadsheet chaos.", tags: ["Dashboards", "CRMs", "Admin panels", "Ops tooling"] },
+export interface ServiceItem {
+  id: string;
+  t: string;
+  icon: IconName;
+  d: string;
+}
+
+// 15 services — single source of truth (landing grid, /work, book-a-call selector).
+export const SERVICES: ServiceItem[] = [
+  { id: "logo", t: "Custom Logo Design", icon: "palette", d: "Distinctive marks and brand identities built from a clear idea, not a template." },
+  { id: "uiux", t: "UI/UX Design", icon: "spark", d: "Interfaces designed around how people actually use them — clear, fast, considered." },
+  { id: "web", t: "Web Development", icon: "globe", d: "Fast, modern sites that load quick, rank well and convert visitors into customers." },
+  { id: "app", t: "App Development", icon: "phone", d: "Web and mobile apps built to ship fast and scale calmly." },
+  { id: "software", t: "Custom Software Development", icon: "code", d: "Tailored systems and platforms engineered around your exact workflow." },
+  { id: "data", t: "Data Science", icon: "data", d: "Turn raw data into models, insight and decisions you can act on." },
+  { id: "cloud", t: "Cloud Computing Services", icon: "cloud", d: "Architect, deploy and scale resilient infrastructure on the cloud." },
+  { id: "iot", t: "Internet of Things (IoT)", icon: "chip", d: "Connected devices and telemetry pipelines, from sensor to dashboard." },
+  { id: "arvr", t: "AR/VR", icon: "cube", d: "Immersive augmented and virtual reality experiences for real use cases." },
+  { id: "game", t: "Game Development", icon: "spark", d: "Engaging games and interactive experiences across platforms." },
+  { id: "aibot", t: "AI Bot Subscription", icon: "bot", d: "Always-on AI assistants and support bots, offered as a managed subscription." },
+  { id: "ai", t: "AI Development", icon: "spark", d: "Custom AI features, automations and copilots wired into your product." },
+  { id: "genai", t: "Generative AI Solutions", icon: "bot", d: "Generative models for content, code and workflows — built for production." },
+  { id: "blockchain", t: "Blockchain Solutions", icon: "chain", d: "Smart contracts, wallets and decentralized apps with security first." },
+  { id: "consulting", t: "IT Consulting", icon: "tool", d: "Strategy, architecture and technical guidance to move with confidence." },
 ];

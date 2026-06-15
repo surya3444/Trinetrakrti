@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useReveal } from "@/hooks/useReveal";
-import { T, BUILDS } from "@/lib/theme";
-import { Container, SectionHead, Eyebrow, ArrowR, Check, Btn, Rotator, CountUp, BuildCard } from "@/components/ui/Shared";
+import { T, SERVICES } from "@/lib/theme";
+import { Container, SectionHead, ArrowR, Check, Btn, Rotator, CountUp, ServiceCard, GeoComposition } from "@/components/ui/Shared";
 import { Testimonials, FAQ, FinalCTA } from "@/components/sections/SharedSections";
 
 export default function Home() {
@@ -12,97 +12,103 @@ export default function Home() {
 
   return (
     <main>
-      <section style={{ position: "relative", overflow: "hidden" }}>
-        <div aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${T.line} 1px,transparent 1px),linear-gradient(90deg,${T.line} 1px,transparent 1px)`, backgroundSize: "56px 56px", opacity: .6, maskImage: "radial-gradient(ellipse 70% 60% at 50% 25%,#000 30%,transparent 78%)", WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 50% 25%,#000 30%,transparent 78%)" }} />
-        <Container style={{ position: "relative", padding: "52px 24px 64px", textAlign: "center" }}>
-          <div className="ol-reveal" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "7px 14px 7px 8px", border: `1px solid ${T.line2}`, borderRadius: 999, background: T.panel, fontSize: 13, color: T.mute, marginBottom: 26 }}>
-            <span className="ol-mono" style={{ background: T.coralWash, color: T.coral, borderRadius: 999, padding: "2px 9px", fontWeight: 600, fontSize: 12 }}>NEW</span>AI automations that pay for themselves <ArrowR s={13} />
-          </div>
-          <h1 className="ol-reveal" data-delay="60" style={{ fontSize: "clamp(38px,6.6vw,76px)", lineHeight: 1.02, letterSpacing: "-.04em", fontWeight: 700, margin: "0 auto", maxWidth: 1000 }}>
-            We build the <Rotator words={["websites", "apps", "AI automations", "internal tools"]} color={T.coral} />
-            <span style={{ display: "block", marginTop: 4 }}>that grow your business.</span>
-          </h1>
-          <p className="ol-reveal" data-delay="130" style={{ margin: "26px auto 0", fontSize: "clamp(17px,2.2vw,21px)", lineHeight: 1.6, color: T.ink70, maxWidth: 660 }}>Most studios take your spec and build it. We do the more useful thing first — understand your business, find what's really slowing it down, then build, automate and scale the fix.</p>
-          <div className="ol-reveal" data-delay="190" style={{ display: "flex", gap: 14, marginTop: 34, flexWrap: "wrap", justifyContent: "center" }}>
-            <Btn variant="coral" onClick={() => router.push("/book")}>Book a free 30-min call <ArrowR /></Btn>
-            <Btn variant="ghost" onClick={() => router.push("/results")}>See real results</Btn>
-          </div>
-          <div className="ol-reveal ol-mono" data-delay="250" style={{ marginTop: 20, fontSize: 13, color: T.faint }}>
-            No deck. No obligation. You'll leave knowing exactly what to build next.
+      {/* HERO */}
+      <section style={{ position: "relative", overflow: "hidden", borderBottom: `2px solid ${T.fg}` }}>
+        <div aria-hidden className="sw-grid-faint" style={{ position: "absolute", inset: 0 }} />
+        <Container style={{ position: "relative", padding: "56px 24px 0" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1.35fr .65fr", gap: 40, alignItems: "center" }} className="ol-hero-grid">
+            <div>
+              <div className="ol-reveal" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "8px 14px", border: `2px solid ${T.fg}`, fontSize: 12, color: T.fg, marginBottom: 26, textTransform: "uppercase", letterSpacing: ".1em", fontWeight: 600 }}>
+                <span style={{ background: T.accent, color: "#fff", padding: "2px 8px", fontWeight: 700 }}>New</span>AI automations that pay for themselves
+              </div>
+              <h1 className="ol-reveal" data-delay="60" style={{ fontSize: "clamp(40px,6.4vw,88px)", lineHeight: .94, letterSpacing: "-.03em", fontWeight: 900, margin: 0, textTransform: "uppercase" }}>
+                We build the <Rotator words={["websites", "apps", "AI automations", "internal tools"]} color={T.accent} />
+                <span style={{ display: "block" }}>that grow your business.</span>
+              </h1>
+              <p className="ol-reveal" data-delay="130" style={{ margin: "26px 0 0", fontSize: "clamp(16px,2vw,20px)", lineHeight: 1.55, color: T.mute, maxWidth: 560 }}>Most studios take your spec and build it. We do the more useful thing first — understand your business, find what&apos;s really slowing it down, then build, automate and scale the fix.</p>
+              <div className="ol-reveal" data-delay="190" style={{ display: "flex", gap: 14, marginTop: 32, flexWrap: "wrap" }}>
+                <Btn variant="coral" onClick={() => router.push("/book")}>Book a call <ArrowR /></Btn>
+                <Btn variant="ghost" onClick={() => router.push("/results")}>See real results</Btn>
+              </div>
+              <div className="ol-reveal ol-mono" data-delay="250" style={{ marginTop: 22, fontSize: 11, color: T.faint, letterSpacing: ".1em" }}>
+                No deck. No obligation. You&apos;ll leave knowing exactly what to build next.
+              </div>
+            </div>
+            <div className="ol-reveal ol-hero-geo" data-delay="160" style={{ aspectRatio: "1", maxWidth: 360, marginLeft: "auto" }}>
+              <GeoComposition />
+            </div>
           </div>
           <BuildPipeline />
         </Container>
       </section>
 
-      {/* NEW: Project Logos Scroller */}
-      <ProjectLogos />
-
-
-
+      {/* SOUND FAMILIAR */}
       <section style={{ padding: "90px 0 0" }}>
         <Container>
-          <SectionHead eyebrow="Sound familiar?" title="You don't have a tech problem. You have a logic problem." sub="Buying another tool rarely fixes things — it usually just adds a tab. The real fix starts with understanding how the work actually flows." />
-          <div className="ol-reveal" data-delay="120" style={{ marginTop: 44, border: `1px solid ${T.line2}`, borderRadius: 20, overflow: "hidden", background: T.panel }}>
-            {[ 
-              { p: "“We’ve got ten tools and none of them talk to each other.”", f: "One connected system, not ten disconnected tabs." }, 
-              { p: "“My team spends half the week on copy-paste busywork.”", f: "Automations that do the repetitive work for them." }, 
+          <SectionHead num="01" eyebrow="Sound familiar?" title="You don't have a tech problem. You have a logic problem." sub="Buying another tool rarely fixes things — it usually just adds a tab. The real fix starts with understanding how the work actually flows." />
+          <div className="ol-reveal" data-delay="120" style={{ marginTop: 44, border: `2px solid ${T.fg}` }}>
+            {[
+              { p: "“We’ve got ten tools and none of them talk to each other.”", f: "One connected system, not ten disconnected tabs." },
+              { p: "“My team spends half the week on copy-paste busywork.”", f: "Automations that do the repetitive work for them." },
               { p: "“I have an idea but no clue what to build first.”", f: "A sharp MVP that proves value before you over-spend." },
               { p: "“Every new customer makes operations messier.”", f: "Systems that add revenue, not friction, as you grow." }
             ].map((row, i) => (
-              <div key={i} className="ol-frame" style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center", gap: 20, padding: "22px 26px", borderTop: i ? `1px solid ${T.line}` : "none" }} onMouseEnter={(e) => (e.currentTarget.style.background = T.wash)} onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}>
-                <div style={{ fontSize: 16.5, color: T.ink70, fontWeight: 500 }}>{row.p}</div><div style={{ color: T.coral }}><ArrowR s={18} /></div><div style={{ fontSize: 16.5, fontWeight: 600, display: "flex", gap: 10, alignItems: "center" }}><Check />{row.f}</div>
+              <div key={i} className="ol-frame ol-prob" style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center", gap: 20, padding: "22px 26px", borderTop: i ? `2px solid ${T.fg}` : "none" }} onMouseEnter={(e) => (e.currentTarget.style.background = T.muted)} onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}>
+                <div style={{ fontSize: 16.5, color: T.mute, fontWeight: 500 }}>{row.p}</div><div style={{ color: T.accent }}><ArrowR s={18} /></div><div style={{ fontSize: 16.5, fontWeight: 600, display: "flex", gap: 10, alignItems: "center" }}><Check c={T.accent} />{row.f}</div>
               </div>
             ))}
           </div>
         </Container>
       </section>
 
+      {/* SERVICES (15) */}
       <section style={{ padding: "90px 0 84px" }}>
         <Container>
-          <SectionHead eyebrow="What we build" title="Four things, built as one system." sub="Not four vendors stitched together. One team building the website, the app, the automations and the tools so they actually work as a whole." />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 16, marginTop: 46 }} className="ol-build-grid">
-            {BUILDS.map((b, i) => <BuildCard key={b.t} b={b} i={i} onClick={() => router.push(b.id === "ai" ? "/ai" : "/work")} />)}
+          <SectionHead num="02" eyebrow="Services" title="What we build." sub="One team, fifteen capabilities — from the logo to the AI behind your product. Pick what you need, or let us figure out the right mix on a call." />
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16, marginTop: 46 }} className="ol-svc-grid">
+            {SERVICES.map((s, i) => (
+              <ServiceCard key={s.id} s={s} i={i} onClick={() => router.push("/book")} />
+            ))}
           </div>
         </Container>
       </section>
 
       <WhoFor router={router} />
 
+      {/* STATS */}
       <section style={{ padding: "90px 0" }}>
         <Container>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 24, flexWrap: "wrap" }}>
-            <SectionHead eyebrow="Proof, not promises" title="The kind of change clients feel." />
+            <SectionHead num="03" eyebrow="Proof, not promises" title="The kind of change clients feel." />
             <Btn variant="ghost" onClick={() => router.push("/results")} style={{ marginBottom: 6 }}>See all results <ArrowR /></Btn>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16, marginTop: 44 }} className="ol-stat-grid">
-            {[ 
-              { n: 70, s: "%", t: "less manual work", d: "once a weekly process became an automation." }, 
-              { n: 3, s: "×", t: "faster to launch", d: "with a focused MVP instead of a bloated v1." }, 
-              { n: 1, s: "", t: "place for everything", d: "one system replacing the tab-juggling." } 
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 0, marginTop: 44, border: `2px solid ${T.fg}` }} className="ol-stat-grid">
+            {[
+              { n: 70, s: "%", t: "less manual work", d: "once a weekly process became an automation." },
+              { n: 3, s: "×", t: "faster to launch", d: "with a focused MVP instead of a bloated v1." },
+              { n: 1, s: "", t: "place for everything", d: "one system replacing the tab-juggling." }
             ].map((c, i) => (
-              <div key={i} className="ol-frame ol-reveal" data-delay={i * 80} style={{ background: T.panel, border: `1px solid ${T.line2}`, borderRadius: 18, padding: "30px 26px" }} onMouseEnter={(e) => (e.currentTarget.style.borderColor = T.coral)} onMouseLeave={(e) => (e.currentTarget.style.borderColor = T.line2)}>
-                <div style={{ fontSize: 54, fontWeight: 700, letterSpacing: "-.04em", lineHeight: 1, color: T.blue }}><CountUp to={c.n} suffix={c.s} /></div>
-                <div style={{ fontSize: 17, fontWeight: 600, marginTop: 12 }}>{c.t}</div>
+              <div key={i} className="ol-reveal ol-stat-cell" data-delay={i * 80} style={{ padding: "30px 26px", borderRight: i < 2 ? `2px solid ${T.fg}` : "none" }}>
+                <div style={{ fontSize: 64, fontWeight: 900, letterSpacing: "-.04em", lineHeight: 1, color: T.accent }}><CountUp to={c.n} suffix={c.s} /></div>
+                <div style={{ fontSize: 16, fontWeight: 700, marginTop: 12, textTransform: "uppercase", letterSpacing: ".02em" }}>{c.t}</div>
                 <p style={{ margin: "8px 0 0", color: T.mute, fontSize: 14.5, lineHeight: 1.55 }}>{c.d}</p>
               </div>
             ))}
           </div>
-          <p className="ol-mono" style={{ fontSize: 12, color: T.faint, marginTop: 18 }}>* Typical of our engagements. Your numbers get scoped on the call.</p>
+          <p className="ol-mono" style={{ fontSize: 11, color: T.faint, marginTop: 18, letterSpacing: ".08em" }}>* Typical of our engagements. Your numbers get scoped on the call.</p>
         </Container>
       </section>
 
       <Testimonials />
 
+      {/* DIFFERENCE / COMPARISON */}
       <section style={{ padding: "90px 0" }}>
         <Container>
-          <div style={{ maxWidth: 720 }}>
-            <Eyebrow>The difference</Eyebrow>
-            <h2 style={{ fontSize: "clamp(28px,4.4vw,46px)", lineHeight: 1.1, fontWeight: 700, letterSpacing: "-.03em", margin: "18px 0 0" }}>Most studios build what you ask for. We build what you actually need.</h2>
-          </div>
-          <div className="ol-reveal" data-delay="100" style={{ marginTop: 44, border: `1px solid ${T.line2}`, borderRadius: 20, overflow: "hidden", background: T.panel }}>
+          <SectionHead num="04" eyebrow="The difference" title="Most studios build what you ask for. We build what you actually need." />
+          <div className="ol-reveal" data-delay="100" style={{ marginTop: 44, border: `2px solid ${T.fg}` }}>
             <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr" }}>
-              {["", "A typical agency", "Only Logic"].map((h, i) => (
-                <div key={i} style={{ padding: "18px 22px", borderBottom: `1px solid ${T.line2}`, background: i === 2 ? T.blueWash : "transparent", fontWeight: 600, fontSize: 14, color: i === 2 ? T.blue : T.mute, borderLeft: i ? `1px solid ${T.line}` : "none" }} className="ol-mono">{h}</div>
+              {["", "A typical agency", "Trinetrakrti"].map((h, i) => (
+                <div key={i} className="ol-mono" style={{ padding: "16px 22px", borderBottom: `2px solid ${T.fg}`, background: i === 2 ? T.accent : i === 1 ? T.muted : "#fff", fontWeight: 700, fontSize: 12, color: i === 2 ? "#fff" : T.fg, borderLeft: i ? `2px solid ${T.fg}` : "none", letterSpacing: ".08em" }}>{h || " "}</div>
               ))}
               {[
                 ["Starts with", "Your spec", "Your problem"],
@@ -112,9 +118,9 @@ export default function Home() {
                 ["You end up with", "More tools to manage", "Time and clarity back"],
               ].map((row, ri) => (
                 <React.Fragment key={ri}>
-                  <div style={{ padding: "16px 22px", borderTop: `1px solid ${T.line}`, fontSize: 15, fontWeight: 500 }}>{row[0]}</div>
-                  <div style={{ padding: "16px 22px", borderTop: `1px solid ${T.line}`, borderLeft: `1px solid ${T.line}`, fontSize: 15, color: T.mute }}>{row[1]}</div>
-                  <div style={{ padding: "16px 22px", borderTop: `1px solid ${T.line}`, borderLeft: `1px solid ${T.line}`, fontSize: 15, fontWeight: 600, background: T.blueWash, display: "flex", gap: 9, alignItems: "center" }}><Check c={T.blue} s={16} />{row[2]}</div>
+                  <div style={{ padding: "16px 22px", borderTop: ri ? `1px solid ${T.fg}` : "none", fontSize: 15, fontWeight: 600 }}>{row[0]}</div>
+                  <div style={{ padding: "16px 22px", borderTop: ri ? `1px solid ${T.fg}` : "none", borderLeft: `2px solid ${T.fg}`, fontSize: 15, color: T.mute }}>{row[1]}</div>
+                  <div style={{ padding: "16px 22px", borderTop: ri ? `1px solid ${T.fg}` : "none", borderLeft: `2px solid ${T.fg}`, fontSize: 15, fontWeight: 600, display: "flex", gap: 9, alignItems: "center" }}><Check c={T.accent} s={16} />{row[2]}</div>
                 </React.Fragment>
               ))}
             </div>
@@ -124,92 +130,26 @@ export default function Home() {
 
       <FAQ />
       <FinalCTA />
-      <style>{`@media(max-width:900px){.ol-build-grid, .ol-stat-grid{grid-template-columns:1fr !important;}}`}</style>
+      <style>{`
+        @media(max-width:980px){.ol-svc-grid{grid-template-columns:repeat(2,1fr) !important;}}
+        @media(max-width:900px){.ol-hero-grid{grid-template-columns:1fr !important;}.ol-hero-geo{display:none !important;}.ol-stat-grid{grid-template-columns:1fr !important;}.ol-stat-cell{border-right:none !important;border-bottom:2px solid ${T.fg};}.ol-stat-cell:last-child{border-bottom:none !important;}}
+        @media(max-width:600px){.ol-svc-grid{grid-template-columns:1fr !important;}.ol-prob{grid-template-columns:1fr !important;gap:10px !important;}}
+      `}</style>
     </main>
   );
 }
 
-function ProjectLogos() {
-  // Added a 'link' property to each object
-  const projects = [
-    { name: "Campus Verse", logo: "/campusverse.svg", link: "https://campusverse.app" },
-    { name: "OAAS", logo: "/oaas.png", link: "https://oaas.rajchavin.com" },
-    { name: "Horticogen", logo: "/horticogen.png", link: "https://horticogen.com" },
-    { name: "trinetrakriti", logo: "/tot.png", link: "https://roopantara.com" },
-    { name: "rajchavin", logo: "/rajchavin.png", link: "https://rajchavin.com" }
-  ];
-  
-  // Quadruple the array so it seamlessly loops on ultra-wide screens
-  const loop = [...projects, ...projects, ...projects, ...projects];
-
-  return (
-    <section className="ol-reveal" style={{ borderBottom: `1px solid ${T.line}`, background: T.panel, padding: "34px 0", overflow: "hidden" }}>
-      <Container>
-        <div className="ol-mono" style={{ fontSize: 12, color: T.faint, textAlign: "center", marginBottom: 36, letterSpacing: ".1em", textTransform: "uppercase" }}>
-          Systems we've engineered
-        </div>
-      </Container>
-      
-      <div style={{ display: "flex", width: "max-content", animation: "ol-marq 45s linear infinite" }}>
-        {loop.map((p, i) => (
-          <a 
-            key={i} 
-            href={p.link}
-            style={{ 
-              display: "flex", 
-              alignItems: "center", 
-              justifyContent: "center",
-              padding: "0 46px", 
-             // filter: "grayscale(100%)", 
-             // opacity: 0.5, 
-              transition: "all .3s cubic-bezier(.2,.7,.2,1)",
-              textDecoration: "none"
-            }} 
-            onMouseEnter={(e) => { 
-              e.currentTarget.style.filter = "grayscale(0%)"; 
-              e.currentTarget.style.opacity = "1"; 
-              e.currentTarget.style.transform = "scale(1.05)";
-            }} 
-            
-          >
-            {/* Logo Container - floating without borders */}
-            <div style={{ height: 44, width: 140, display: "grid", placeItems: "center" }}>
-              {p.logo ? (
-                <img 
-                  src={p.logo} 
-                  alt={p.name} 
-                  style={{ width: "100%", height: "100%", objectFit: "contain" }} 
-                  onError={(e) => { 
-                    // Fallback to text if image is missing
-                    e.currentTarget.style.display = 'none'; 
-                    e.currentTarget.parentElement!.innerHTML = `<span class="ol-mono" style="font-size: 18px; font-weight: 700; color: ${T.mute}">${p.name}</span>`; 
-                  }} 
-                />
-              ) : (
-                <span className="ol-mono" style={{ fontSize: 18, fontWeight: 700, color: T.mute }}>{p.name}</span>
-              )}
-            </div>
-          </a>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function BuildPipeline() {
-  const stages = [ { k: "Understand", d: "We learn your business" }, { k: "Design", d: "We shape the right fix" }, { k: "Build", d: "Website · app · tool" }, { k: "Automate", d: "AI does the busywork" }, { k: "Scale", d: "It grows with you" } ];
+  const stages = [{ k: "Understand", d: "We learn your business" }, { k: "Design", d: "We shape the right fix" }, { k: "Build", d: "Website · app · tool" }, { k: "Automate", d: "AI does the busywork" }, { k: "Scale", d: "It grows with you" }];
   return (
-    <div className="ol-reveal" data-delay="300" style={{ marginTop: 54, maxWidth: 1000, marginLeft: "auto", marginRight: "auto" }}>
-      <div className="ol-pipe" style={{ display: "flex", alignItems: "stretch", background: T.panel, border: `1px solid ${T.line2}`, borderRadius: 18, padding: 10, overflowX: "auto" }}>
+    <div className="ol-reveal" data-delay="300" style={{ marginTop: 56, marginBottom: 64 }}>
+      <div className="ol-pipe" style={{ display: "flex", alignItems: "stretch", border: `2px solid ${T.fg}`, overflowX: "auto" }}>
         {stages.map((s, i) => (
-          <React.Fragment key={s.k}>
-            <div style={{ flex: "1 1 0", minWidth: 130, padding: "16px 16px", textAlign: "left" }}>
-              <div className="ol-mono" style={{ fontSize: 11, color: T.coral, marginBottom: 8 }}>0{i + 1}</div>
-              <div style={{ fontWeight: 600, fontSize: 15 }}>{s.k}</div>
-              <div style={{ color: T.faint, fontSize: 13, marginTop: 4 }}>{s.d}</div>
-            </div>
-            {i < stages.length - 1 && <div aria-hidden style={{ display: "flex", alignItems: "center", color: T.line2 }}><ArrowR s={20} /></div>}
-          </React.Fragment>
+          <div key={s.k} style={{ flex: "1 1 0", minWidth: 150, padding: "20px 18px", borderLeft: i ? `2px solid ${T.fg}` : "none" }}>
+            <div className="ol-mono" style={{ fontSize: 11, color: T.accent, marginBottom: 10, fontWeight: 700 }}>0{i + 1}</div>
+            <div style={{ fontWeight: 700, fontSize: 15, textTransform: "uppercase", letterSpacing: ".02em" }}>{s.k}</div>
+            <div style={{ color: T.mute, fontSize: 13, marginTop: 4 }}>{s.d}</div>
+          </div>
         ))}
       </div>
       <style>{`@media(max-width:760px){.ol-pipe{justify-content:flex-start;}}`}</style>
@@ -228,21 +168,21 @@ function WhoFor({ router }: { router: any }) {
   return (
     <section>
       <Container>
-        <div style={{ background: T.wash, border: `1px solid ${T.line2}`, borderRadius: 24, padding: "44px 40px" }}>
-          <SectionHead eyebrow="Who it's for" title="Built for where you are right now." align="center" />
-          <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginTop: 30 }}>
-            {segs.map((seg) => {
+        <div className="sw-diagonal" style={{ border: `2px solid ${T.fg}`, padding: "44px 40px" }}>
+          <SectionHead num="05" eyebrow="Who it's for" title="Built for where you are right now." align="center" />
+          <div style={{ display: "flex", gap: 0, justifyContent: "center", flexWrap: "wrap", marginTop: 30, border: `2px solid ${T.fg}`, width: "fit-content", margin: "30px auto 0" }}>
+            {segs.map((seg, i) => {
               const a = active === seg.id;
-              return <button key={seg.id} onClick={() => setActive(seg.id)} className="ol-btn" style={{ padding: "11px 20px", borderRadius: 999, fontSize: 14.5, fontWeight: 600, border: `1px solid ${a ? T.ink : T.line2}`, background: a ? T.ink : T.panel, color: a ? "#fff" : T.ink70 }}>{seg.label}</button>;
+              return <button key={seg.id} onClick={() => setActive(seg.id)} className="ol-btn" style={{ padding: "12px 20px", fontSize: 12.5, fontWeight: 700, letterSpacing: ".06em", textTransform: "uppercase", border: "none", borderLeft: i ? `2px solid ${T.fg}` : "none", background: a ? T.fg : "#fff", color: a ? "#fff" : T.fg }}>{seg.label}</button>;
             })}
           </div>
-          <div key={active} style={{ marginTop: 32, display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: 32, alignItems: "center", animation: "ol-fade .4s ease" }} className="ol-who-grid">
+          <div key={active} style={{ marginTop: 32, display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: 32, alignItems: "center", animation: "ol-fade .3s ease", background: "#fff", border: `2px solid ${T.fg}`, padding: 28 }} className="ol-who-grid">
             <div>
-              <h3 style={{ fontSize: "clamp(22px,3vw,30px)", fontWeight: 700, letterSpacing: "-.02em", margin: 0 }}>{s.head}</h3>
+              <h3 style={{ fontSize: "clamp(22px,3vw,32px)", fontWeight: 800, letterSpacing: "-.02em", textTransform: "uppercase", lineHeight: 1, margin: 0 }}>{s.head}</h3>
               <p style={{ color: T.mute, fontSize: 17, lineHeight: 1.6, marginTop: 14 }}>{s.d}</p>
-              <Btn variant="primary" onClick={() => router.push("/book")} style={{ marginTop: 20 }}>Book a free call <ArrowR /></Btn>
+              <Btn variant="coral" onClick={() => router.push("/book")} style={{ marginTop: 20 }}>Book a call <ArrowR /></Btn>
             </div>
-            <div style={{ display: "grid", gap: 10 }}>{s.points.map((p) => <div key={p} style={{ display: "flex", gap: 12, alignItems: "center", background: T.panel, border: `1px solid ${T.line}`, borderRadius: 14, padding: "16px 18px", fontSize: 15.5, fontWeight: 500 }}><Check />{p}</div>)}</div>
+            <div style={{ display: "grid", gap: 0, border: `2px solid ${T.fg}` }}>{s.points.map((p, pi) => <div key={p} style={{ display: "flex", gap: 12, alignItems: "center", padding: "16px 18px", fontSize: 15.5, fontWeight: 600, borderTop: pi ? `2px solid ${T.fg}` : "none" }}><Check c={T.accent} />{p}</div>)}</div>
           </div>
         </div>
       </Container>

@@ -8,11 +8,11 @@ export async function POST(req: Request) {
     const data = await req.json();
     
     // 1. We extract the phone number from the incoming data here
-    const { type, problem, name, email, phone, company, stage } = data;
+    const { service, problem, name, email, phone, company, stage } = data;
 
     // 2. Save data to Firebase Firestore (including phone)
     await addDoc(collection(db, "bookings"), {
-      callType: type,
+      service: service || "N/A",
       problem,
       name,
       email,
@@ -37,9 +37,10 @@ export async function POST(req: Request) {
       from: process.env.GMAIL_USER,
       to: process.env.GMAIL_USER, // Sending it to yourself
       replyTo: email, // So you can hit "reply" and talk directly to the lead
-      subject: `New Lead: ${name} booked a ${type === "clarity" ? "Clarity" : "Technical"} Call`,
+      subject: `New Lead: ${name} — ${service || "General enquiry"}`,
       html: `
-        <h2 style="color: #13182B;">New Booking Details</h2>
+        <h2 style="color: #17222F;">New Booking Details</h2>
+        <p><strong>Service:</strong> ${service || "Not specified"}</p>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
