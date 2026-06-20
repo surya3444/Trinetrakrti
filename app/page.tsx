@@ -61,10 +61,10 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* SERVICES (15) */}
+      {/* SERVICES — focused hero capabilities (#38) */}
       <section style={{ padding: "90px 0 84px" }}>
         <Container>
-          <SectionHead num="02" eyebrow="Services" title="What we build." sub="One team, fifteen capabilities — from the logo to the AI behind your product. Pick what you need, or let us figure out the right mix on a call." />
+          <SectionHead num="02" eyebrow="Services" title="What we build." sub="One team, focused on the capabilities we lead with — custom software, AI, data, web and apps. Pick what you need, or let us figure out the right mix on a call." />
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16, marginTop: 46 }} className="ol-svc-grid">
             {SERVICES.map((s, i) => (
               <ServiceCard key={s.id} s={s} i={i} onClick={() => router.push("/book")} />

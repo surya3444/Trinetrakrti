@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useReveal } from "@/hooks/useReveal";
-import { T, SERVICES } from "@/lib/theme";
+import { T, ALL_SERVICES as SERVICES } from "@/lib/theme";
 import { Container, Eyebrow, Btn, ArrowR } from "@/components/ui/Shared";
 
 export default function Book() {

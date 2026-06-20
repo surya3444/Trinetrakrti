@@ -11,7 +11,7 @@ export default function Work() {
   const router = useRouter();
   return (
     <main>
-      <PageHero num="01" eyebrow="What we build" title={<>Fifteen capabilities,<br />one engineering team.</>} sub="Pick the thing you need, or let us figure out the right mix on a call. Either way, it's one team building one connected system." />
+      <PageHero num="01" eyebrow="What we build" title={<>The capabilities<br />we lead with.</>} sub="Pick the thing you need, or let us figure out the right mix on a call. Either way, it's one team building one connected system." />
       <section style={{ padding: "0 0 80px" }}>
         <Container>
           <div style={{ borderTop: `2px solid ${T.fg}` }}>

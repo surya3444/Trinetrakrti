@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { T, NAV } from "@/lib/theme";
+import { T, NAV, BRAND } from "@/lib/theme";
 import { Container, Btn, ArrowR } from "@/components/ui/Shared";
 
 export function Footer() {
@@ -27,7 +27,7 @@ export function Footer() {
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "22px 0 36px", borderTop: "2px solid rgba(255,255,255,.16)", flexWrap: "wrap", gap: 12 }}>
-          <span className="ol-mono" style={{ fontSize: 12, color: "rgba(255,255,255,.5)" }}>© {new Date().getFullYear()} Trinetrakrti — Business Systems Studio</span>
+          <span className="ol-mono" style={{ fontSize: 12, color: "rgba(255,255,255,.5)" }}>© {new Date().getFullYear()} {BRAND.lockup}</span>
           <span className="ol-mono" style={{ fontSize: 12, color: "rgba(255,255,255,.5)" }}>Built around how you work.</span>
         </div>
       </Container>

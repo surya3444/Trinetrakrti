@@ -29,6 +29,21 @@ export const T = {
   green: fg,
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Brand — single source of truth (Change Register #1 / #2 / #3).
+// One brand, one locked tagline, one canonical domain.
+// ─────────────────────────────────────────────────────────────────────────────
+export const BRAND = {
+  name: "Trinetrakrti",
+  tagline: "Brain Behind AI",
+  // Used for the title/footer lockup and metadata.
+  lockup: "Trinetrakrti — Brain Behind AI",
+  // Canonical domain (the other surface 301-redirects here at cutover).
+  url: "https://trinetrakrti.com",
+  description:
+    "We build websites, apps, AI automations & internal tools — around how your business actually works.",
+} as const;
+
 export interface NavItem {
   to: string;
   label: string;
@@ -74,8 +89,9 @@ export interface ServiceItem {
   d: string;
 }
 
-// 15 services — single source of truth (landing grid, /work, book-a-call selector).
-export const SERVICES: ServiceItem[] = [
+// Full capability catalogue — kept as the complete menu (e.g. the booking
+// selector, where any ask is valid). Not shown as a generalist grid anymore.
+export const ALL_SERVICES: ServiceItem[] = [
   { id: "logo", t: "Custom Logo Design", icon: "palette", d: "Distinctive marks and brand identities built from a clear idea, not a template." },
   { id: "uiux", t: "UI/UX Design", icon: "spark", d: "Interfaces designed around how people actually use them — clear, fast, considered." },
   { id: "web", t: "Web Development", icon: "globe", d: "Fast, modern sites that load quick, rank well and convert visitors into customers." },
@@ -92,3 +108,11 @@ export const SERVICES: ServiceItem[] = [
   { id: "blockchain", t: "Blockchain Solutions", icon: "chain", d: "Smart contracts, wallets and decentralized apps with security first." },
   { id: "consulting", t: "IT Consulting", icon: "tool", d: "Strategy, architecture and technical guidance to move with confidence." },
 ];
+
+// Focused hero capabilities (Change Register #38 — TRIM).
+// The overview grid (homepage, /work) shows only the capabilities we lead with
+// and have real proof for; the full catalogue above stays available on booking.
+const CORE_IDS = ["software", "ai", "data", "web", "app", "uiux"] as const;
+export const SERVICES: ServiceItem[] = CORE_IDS.map(
+  (id) => ALL_SERVICES.find((s) => s.id === id)!
+);

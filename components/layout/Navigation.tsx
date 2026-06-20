@@ -7,16 +7,25 @@ import { Container, Btn, ArrowR } from "@/components/ui/Shared";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
   useEffect(() => { setOpen(false); }, [pathname]);
 
+  // #17 — condense the sticky header once the page is scrolled.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header style={{ position: "sticky", top: 0, zIndex: 50, background: "#fff", borderBottom: `2px solid ${T.fg}` }}>
-      <Container style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 74 }}>
+    <header style={{ position: "sticky", top: 0, zIndex: 50, background: "#fff", borderBottom: `2px solid ${T.fg}`, boxShadow: scrolled ? "0 1px 0 rgba(23,34,47,.06), 0 8px 24px rgba(23,34,47,.06)" : "none", transition: "box-shadow .2s ease" }}>
+      <Container style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: scrolled ? 58 : 74, transition: "height .2s ease" }}>
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <img style={{ width: "150px" }} src="/tot2.svg" alt="Trinetrakrti" />
+          <img style={{ width: scrolled ? "120px" : "150px", transition: "width .2s ease" }} src="/tot2.svg" alt="Trinetrakrti" />
         </Link>
         <nav className="ol-dnav" style={{ display: "flex", alignItems: "center", gap: 28 }}>
           {NAV.slice(1).map((n) => {
