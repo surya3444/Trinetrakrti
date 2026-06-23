@@ -63,7 +63,7 @@ export const BRAND = {
     "We build websites, apps, AI automations & internal tools — around how your business actually works.",
   // WhatsApp click-to-chat. Replace with the real business number in full
   // international format, digits only (country code + number, no +/spaces).
-  whatsapp: "919000000000",
+  whatsapp: "918006800594",
   whatsappMessage: "Hi Trinetrakrti — I'd like to talk about a project.",
 } as const;
 
