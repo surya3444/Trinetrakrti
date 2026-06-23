@@ -12,9 +12,9 @@ export default function Work() {
   return (
     <main>
       <PageHero num="01" eyebrow="What we build" title={<>The capabilities<br />we lead with.</>} sub="Pick the thing you need, or let us figure out the right mix on a call. Either way, it's one team building one connected system." />
-      <section style={{ padding: "0 0 80px" }}>
+      <section style={{ padding: "80px 0" }}>
         <Container>
-          <div style={{ borderTop: `2px solid ${T.fg}` }}>
+          <div style={{ display: "grid", gap: 14 }}>
             {SERVICES.map((s, i) => (
               <Row key={s.id} s={s} i={i} onClick={() => router.push("/book")} />
             ))}
@@ -29,15 +29,15 @@ export default function Work() {
 function Row({ s, i, onClick }: { s: typeof SERVICES[number]; i: number; onClick: () => void }) {
   const [h, setH] = React.useState(false);
   return (
-    <div className="ol-reveal" data-delay={(i % 8) * 40} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)} onClick={onClick}
-      style={{ display: "grid", gridTemplateColumns: "auto auto 1fr auto", gap: 26, padding: "26px 16px", borderBottom: `2px solid ${T.fg}`, alignItems: "center", cursor: "pointer", background: h ? T.fg : "transparent", color: h ? "#fff" : T.fg, transition: "background .15s ease-out, color .15s ease-out" }}>
-      <span className="ol-mono" style={{ fontSize: 13, fontWeight: 700, color: h ? "#fff" : T.accent, width: 28 }}>{`0${i + 1}`.slice(-2)}</span>
-      <div style={{ width: 48, height: 48, border: `2px solid ${h ? "#fff" : T.fg}`, display: "grid", placeItems: "center", flexShrink: 0 }}><BuildIcon name={s.icon} c={h ? "#fff" : T.fg} /></div>
+    <div className="ol-reveal ol-frame" data-delay={(i % 8) * 40} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)} onClick={onClick}
+      style={{ display: "grid", gridTemplateColumns: "auto auto 1fr auto", gap: 24, padding: "24px 26px", border: `1px solid ${T.border}`, borderRadius: T.radius, alignItems: "center", cursor: "pointer", background: "#fff", color: T.fg, boxShadow: h ? T.shadowFloat : T.shadowCard, transform: h ? "translateY(-3px)" : "none" }}>
+      <span className="ol-mono" style={{ fontSize: 13, fontWeight: 700, color: T.faint, width: 26 }}>{`0${i + 1}`.slice(-2)}</span>
+      <div style={{ width: 50, height: 50, borderRadius: 12, background: T.coralWash, display: "grid", placeItems: "center", flexShrink: 0 }}><BuildIcon name={s.icon} c={T.accent} /></div>
       <div>
-        <h3 style={{ fontSize: "clamp(20px,2.6vw,28px)", margin: 0, fontWeight: 800, textTransform: "uppercase", letterSpacing: "-.01em", lineHeight: 1 }}>{s.t}</h3>
-        <p style={{ margin: "8px 0 0", color: h ? "rgba(255,255,255,.8)" : T.mute, fontSize: 15, lineHeight: 1.5, maxWidth: 640 }} className="ol-row-desc">{s.d}</p>
+        <h3 style={{ fontSize: "clamp(19px,2.4vw,25px)", margin: 0, fontWeight: 600, letterSpacing: "-.02em", lineHeight: 1.1 }}>{s.t}</h3>
+        <p style={{ margin: "7px 0 0", color: T.mute, fontSize: 15, lineHeight: 1.5, maxWidth: 640 }} className="ol-row-desc">{s.d}</p>
       </div>
-      <ArrowR s={22} />
+      <span style={{ color: T.accent, display: "inline-flex", transform: h ? "translateX(4px)" : "none", transition: "transform .2s ease" }}><ArrowR s={22} /></span>
     </div>
   );
 }

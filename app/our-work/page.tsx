@@ -55,9 +55,9 @@ export default function OurWork() {
     <main>
       <PageHero num="01" eyebrow="Our Work" title={<>Things we&apos;ve built.<br />Logic in action.</>} sub="A look at some of the recent systems, platforms, and tools we've engineered to solve real-world problems." />
 
-      <section style={{ padding: "44px 0 80px" }}>
+      <section style={{ padding: "72px 0 90px" }}>
         <Container>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 18 }} className="ol-portfolio-grid">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 22 }} className="ol-portfolio-grid">
             {projects.map((p, i) => <Card key={p.title} p={p} i={i} />)}
           </div>
         </Container>
@@ -72,22 +72,22 @@ export default function OurWork() {
 function Card({ p, i }: { p: Project; i: number }) {
   const [h, setH] = React.useState(false);
   return (
-    <a href={p.link} target="_blank" rel="noreferrer" className="ol-reveal" data-delay={i * 80}
+    <a href={p.link} target="_blank" rel="noreferrer" className="ol-reveal ol-frame" data-delay={i * 80}
       onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
-      style={{ display: "flex", flexDirection: "column", background: "#fff", border: `2px solid ${T.fg}`, padding: "32px 30px", textDecoration: "none", color: T.fg }}>
+      style={{ display: "flex", flexDirection: "column", background: "#fff", border: `1px solid ${T.border}`, borderRadius: T.radius, padding: "30px 30px", textDecoration: "none", color: T.fg, boxShadow: h ? T.shadowFloat : T.shadowCard, transform: h ? "translateY(-4px)" : "none" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24 }}>
-        <span className="ol-mono" style={{ fontSize: 10.5, color: "#fff", background: T.fg, padding: "5px 10px", letterSpacing: ".06em" }}>{p.category}</span>
-        <span style={{ color: T.accent }}><ArrowR s={20} /></span>
+        <span style={{ fontSize: 12, fontWeight: 500, color: T.mute, background: T.muted, borderRadius: 999, padding: "5px 12px" }}>{p.category}</span>
+        <span style={{ color: T.accent, display: "inline-flex", transform: h ? "translate(3px,-3px)" : "none", transition: "transform .2s ease" }}><ArrowR s={20} /></span>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 16 }}>
-        <div style={{ width: 52, height: 52, border: `2px solid ${T.fg}`, display: "flex", justifyContent: "center", alignItems: "center", overflow: "hidden", flexShrink: 0 }}>
-          <img src={p.logo} alt={`${p.title} logo`} style={{ width: "100%", height: "100%", objectFit: "cover", filter: h ? "none" : "grayscale(100%)", transition: "filter .2s" }} onError={(e) => { e.currentTarget.style.display = "none"; e.currentTarget.parentElement!.innerHTML = `<span class="ol-mono" style="font-size: 20px; color: ${T.fg}">${p.title.charAt(0)}</span>`; }} />
+        <div style={{ width: 54, height: 54, borderRadius: 14, border: `1px solid ${T.border}`, background: T.muted, display: "flex", justifyContent: "center", alignItems: "center", overflow: "hidden", flexShrink: 0 }}>
+          <img src={p.logo} alt={`${p.title} logo`} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "filter .2s" }} onError={(e) => { e.currentTarget.style.display = "none"; e.currentTarget.parentElement!.innerHTML = `<span style="font-size: 22px; font-weight:600; color: ${T.fg}">${p.title.charAt(0)}</span>`; }} />
         </div>
-        <h3 style={{ fontSize: 22, margin: 0, fontWeight: 800, letterSpacing: "-.02em", textTransform: "uppercase", lineHeight: 1 }}>{p.title}</h3>
+        <h3 style={{ fontSize: 21, margin: 0, fontWeight: 600, letterSpacing: "-.02em", lineHeight: 1.1 }}>{p.title}</h3>
       </div>
       <p style={{ margin: "0 0 24px", color: T.mute, fontSize: 15, lineHeight: 1.6, flex: 1 }}>{p.description}</p>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: "auto", paddingTop: 18, borderTop: `2px solid ${T.fg}` }}>
-        {p.tech.map((t) => <span key={t} className="ol-mono" style={{ fontSize: 11, color: T.fg, border: `1px solid ${T.fg}`, padding: "4px 9px", letterSpacing: ".04em" }}>{t}</span>)}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: "auto", paddingTop: 18, borderTop: `1px solid ${T.border}` }}>
+        {p.tech.map((t) => <span key={t} style={{ fontSize: 12, fontWeight: 500, color: T.mute, background: T.muted, borderRadius: 999, padding: "5px 11px" }}>{t}</span>)}
       </div>
     </a>
   );

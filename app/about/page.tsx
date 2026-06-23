@@ -16,15 +16,15 @@ export default function About() {
   return (
     <main>
       <PageHero num="01" eyebrow="About" title={<>We build with logic,<br />not guesswork.</>} sub="Too many businesses get handed software they didn't need, built off a spec nobody pressure-tested. We do it the other way around." />
-      <section style={{ padding: "0 0 80px" }}>
+      <section style={{ padding: "80px 0" }}>
         <Container>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, border: `2px solid ${T.fg}`, borderTop: "none" }} className="ol-about-grid">
-            <div className="ol-reveal" style={{ padding: "44px 36px", borderRight: `2px solid ${T.fg}` }} >
-              <p style={{ fontSize: 18, lineHeight: 1.7, color: T.fg, marginTop: 0 }}>Trinetrakrti is a Business Systems Studio. We build websites, apps, AI automations and internal tools — but we lead with understanding, not order-taking.</p>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 28, alignItems: "start" }} className="ol-about-grid">
+            <div className="ol-reveal">
+              <p style={{ fontSize: 19, lineHeight: 1.7, color: T.fg, marginTop: 0, fontWeight: 500 }}>Trinetrakrti is a Business Systems Studio. We build websites, apps, AI automations and internal tools — but we lead with understanding, not order-taking.</p>
               <p style={{ fontSize: 18, lineHeight: 1.7, color: T.mute, marginTop: 18 }}>Every project starts the same way: we sit with you, map how the business actually works, and find where the real friction is. Then we build the smallest thing that fixes it, learn from how it&apos;s used, and scale what works.</p>
               <p style={{ fontSize: 18, lineHeight: 1.7, color: T.mute, marginTop: 18 }}>The result is software you&apos;ll actually use — because it was built around your logic, not someone else&apos;s template.</p>
             </div>
-            <div className="ol-reveal" data-delay="100" style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+            <div className="ol-reveal" data-delay="100" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
               {values.map((v, i) => (
                 <Value key={v.t} v={v} i={i} />
               ))}
@@ -33,7 +33,7 @@ export default function About() {
         </Container>
       </section>
       <FinalCTA />
-      <style>{`@media(max-width:820px){.ol-about-grid{grid-template-columns:1fr !important;}.ol-about-grid>div:first-child{border-right:none !important;border-bottom:2px solid ${T.fg};}}`}</style>
+      <style>{`@media(max-width:820px){.ol-about-grid{grid-template-columns:1fr !important;gap:32px !important;}}`}</style>
     </main>
   );
 }
@@ -41,11 +41,11 @@ export default function About() {
 function Value({ v, i }: { v: { t: string; d: string }; i: number }) {
   const [h, setH] = React.useState(false);
   return (
-    <div onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
-      style={{ padding: "24px 22px", borderLeft: i % 2 ? `2px solid ${T.fg}` : "none", borderTop: i > 1 ? `2px solid ${T.fg}` : "none", background: h ? T.accent : "#fff", color: h ? "#fff" : T.fg, transition: "background .15s ease-out, color .15s ease-out", minHeight: 150 }}>
-      <div className="ol-mono" style={{ fontSize: 11, color: h ? "#fff" : T.accent, marginBottom: 10, fontWeight: 700, letterSpacing: ".1em" }}>value.0{i + 1}</div>
-      <div style={{ fontSize: 18, fontWeight: 800, textTransform: "uppercase", letterSpacing: "-.01em" }}>{v.t}</div>
-      <p style={{ margin: "8px 0 0", color: h ? "rgba(255,255,255,.85)" : T.mute, fontSize: 14.5, lineHeight: 1.5 }}>{v.d}</p>
+    <div className="ol-frame" onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
+      style={{ padding: "24px 22px", border: `1px solid ${T.border}`, borderRadius: T.radius, background: "#fff", boxShadow: h ? T.shadowFloat : T.shadowCard, transform: h ? "translateY(-4px)" : "none", minHeight: 156 }}>
+      <div className="ol-mono" style={{ fontSize: 11, color: T.accent, marginBottom: 10, fontWeight: 700, letterSpacing: ".1em" }}>value.0{i + 1}</div>
+      <div style={{ fontSize: 18, fontWeight: 600, letterSpacing: "-.015em", color: T.fg }}>{v.t}</div>
+      <p style={{ margin: "8px 0 0", color: T.mute, fontSize: 14.5, lineHeight: 1.5 }}>{v.d}</p>
     </div>
   );
 }

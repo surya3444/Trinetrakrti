@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
 import { MobileCTA } from "@/components/layout/MobileCTA";
+import { WhatsAppFAB } from "@/components/layout/WhatsAppFAB";
 import { BRAND } from "@/lib/theme";
 
 export const metadata: Metadata = {
@@ -77,6 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar />
           {children}
           <Footer />
+          <WhatsAppFAB />
           <MobileCTA />
           <div className="ol-spacer" style={{ height: 0 }} />
           <style>{`@media(max-width:900px){.ol-spacer{height:78px !important;}}`}</style>

@@ -1,109 +1,175 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Trinetrakrti — Stripe-inspired foundation.
+   Sohne is proprietary to Stripe; Inter is the closest open substitute and is
+   tuned here (weights, tracking, optical sizing) to read like Stripe's UI.
+   Brand palette is unchanged: navy #17222F, red #E5322B, white.
+   ─────────────────────────────────────────────────────────────────────────── */
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; }
 
 .ol-root {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  color: #17222F;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-feature-settings: 'cv05' 1, 'cv08' 1, 'ss01' 1;
+  color: #3C4452;
   background: #FFFFFF;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
   position: relative;
+  letter-spacing: -0.011em;
 }
 
-/* Swiss paper-grain noise, applied globally at low opacity */
-.ol-root::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: .015;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+.ol-root h1, .ol-root h2, .ol-root h3, .ol-root h4 {
+  color: #17222F;
+  letter-spacing: -0.022em;
 }
-.ol-root > * { position: relative; z-index: 1; }
 
-.ol-root ::selection { background: #E5322B; color: #fff; }
+.ol-root ::selection { background: rgba(229,50,43,.16); color: #17222F; }
 
-/* Swiss "mono" → uppercase tracked label */
+/* Stripe eyebrow: small, uppercase, tracked, brand-colored */
 .ol-mono {
   font-family: 'Inter', system-ui, sans-serif;
   text-transform: uppercase;
-  letter-spacing: .14em;
+  letter-spacing: .085em;
   font-weight: 600;
 }
 
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; }
 
-/* ---- Swiss texture patterns ---- */
-.sw-grid {
+/* ── Signature Stripe angled gradient hero canvas ─────────────────────────── */
+.st-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  /* gradient painted directly on the section — always visible */
+  background: linear-gradient(150deg, #1A2536 0%, #243349 22%, #5A2A3B 55%, #B22F2C 80%, #E5322B 100%);
+}
+/* soft luminous highlights to lift the gradient the way Stripe's does */
+.st-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 55% at 80% 6%, rgba(255,255,255,.26), transparent 60%),
+    radial-gradient(55% 55% at 10% 4%, rgba(255,255,255,.12), transparent 55%);
+}
+/* diagonal white wedge along the bottom → Stripe-style angled cut into the page */
+.st-hero::after {
+  content: '';
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  bottom: -1px;
+  height: 80px;
+  z-index: 1;
+  background: #fff;
+  transform: skewY(-2.4deg);
+  transform-origin: bottom left;
+}
+/* keep all hero content above the overlays */
+.st-hero > * { position: relative; z-index: 2; }
+
+/* fine guide grid that Stripe overlays on dark sections */
+.st-grid-overlay {
   background-image:
-    linear-gradient(#17222F 1px, transparent 1px),
-    linear-gradient(90deg, #17222F 1px, transparent 1px);
-  background-size: 24px 24px;
-  background-position: -1px -1px;
-}
-.sw-grid-faint {
-  background-image:
-    linear-gradient(rgba(23,34,47,.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(23,34,47,.06) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-.sw-dots {
-  background-image: radial-gradient(rgba(23,34,47,.16) 1px, transparent 1px);
-  background-size: 16px 16px;
-}
-.sw-diagonal {
-  background-image: repeating-linear-gradient(45deg, rgba(23,34,47,.05) 0, rgba(23,34,47,.05) 1px, transparent 1px, transparent 10px);
+    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(ellipse 80% 90% at 50% 0%, #000, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 0%, #000, transparent 78%);
 }
 
-/* ---- Animations (mechanical, snappy) ---- */
-@keyframes ol-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+/* ── Soft texture utilities (kept for compatibility, gentled to Stripe feel) ── */
+.sw-grid,
+.sw-grid-faint {
+  background-image:
+    linear-gradient(rgba(23,34,47,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23,34,47,.035) 1px, transparent 1px);
+  background-size: 46px 46px;
+}
+.sw-dots {
+  background-image: radial-gradient(rgba(23,34,47,.10) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.sw-diagonal { background: #F6F9FC; }
+
+/* ── Animations — gentle Stripe-style fade/rise ───────────────────────────── */
+@keyframes ol-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes ol-fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes ol-marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes ol-rot { 0% { opacity: 0; transform: translateY(70%); } 11%, 89% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-70%); } }
+@keyframes st-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes st-float-b { 0%,100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-14px) rotate(-6deg); } }
+@keyframes st-bar { from { transform: scaleY(.12); } to { transform: scaleY(1); } }
+@keyframes st-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(46,196,140,.55); } 70% { box-shadow: 0 0 0 7px rgba(46,196,140,0); } }
+@keyframes st-draw { to { stroke-dashoffset: 0; } }
+@keyframes st-wa-pop { 0% { transform: scale(0); opacity: 0; } 60% { transform: scale(1.12); } 100% { transform: scale(1); opacity: 1; } }
+/* flowing mesh drift (Stripe-style hero gradient) — each blob translates,
+   scales and rotates on its own loop so the clouds blend into one moving wash */
+@keyframes mesh-a {
+  0%   { transform: translate(0,0) scale(1) rotate(0deg); }
+  33%  { transform: translate(8%,-6%) scale(1.18) rotate(40deg); }
+  66%  { transform: translate(-6%,7%) scale(.92) rotate(-30deg); }
+  100% { transform: translate(0,0) scale(1) rotate(0deg); }
+}
+@keyframes mesh-b {
+  0%   { transform: translate(0,0) scale(1) rotate(0deg); }
+  33%  { transform: translate(-9%,5%) scale(.88) rotate(-45deg); }
+  66%  { transform: translate(7%,-8%) scale(1.22) rotate(35deg); }
+  100% { transform: translate(0,0) scale(1) rotate(0deg); }
+}
+@keyframes mesh-c {
+  0%   { transform: translate(0,0) scale(1) rotate(0deg); }
+  33%  { transform: translate(6%,8%) scale(1.15) rotate(30deg); }
+  66%  { transform: translate(-8%,-5%) scale(.9) rotate(-40deg); }
+  100% { transform: translate(0,0) scale(1) rotate(0deg); }
+}
+@keyframes st-wa-pulse { 0% { box-shadow: 0 10px 24px rgba(37,211,102,.4), 0 0 0 0 rgba(37,211,102,.45); } 70% { box-shadow: 0 10px 24px rgba(37,211,102,.4), 0 0 0 16px rgba(37,211,102,0); } 100% { box-shadow: 0 10px 24px rgba(37,211,102,.4), 0 0 0 0 rgba(37,211,102,0); } }
 
 .ol-reveal { opacity: 0; }
-.ol-reveal.is-in { animation: ol-up .42s ease-out forwards; }
+.ol-reveal.is-in { animation: ol-up .6s cubic-bezier(.16,.84,.44,1) forwards; }
 
-.ol-btn { transition: background .15s ease-out, color .15s ease-out, border-color .15s ease-out; }
-.ol-frame { transition: background .15s ease-out, border-color .15s ease-out, color .15s ease-out; }
+/* ── Interactive transitions ──────────────────────────────────────────────── */
+.ol-btn { transition: transform .18s cubic-bezier(.16,.84,.44,1), box-shadow .18s ease, background .18s ease, color .18s ease, border-color .18s ease; }
+.ol-btn:active { transform: translateY(1px); }
+.ol-frame { transition: transform .22s cubic-bezier(.16,.84,.44,1), box-shadow .22s ease, border-color .22s ease; }
 
-/* Swiss nav link — vertical slide, red replacement from below */
+/* Stripe nav link — subtle colour shift on hover (no brutalist slide) */
 .sw-navlink {
   position: relative;
   display: inline-block;
-  overflow: hidden;
   line-height: 1.1;
+  transition: color .15s ease;
 }
-.sw-navlink > span {
-  display: block;
-  transition: transform .2s ease-out;
-}
-.sw-navlink > span::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  top: 100%;
-  color: #E5322B;
-}
-.sw-navlink:hover > span { transform: translateY(-100%); }
+.sw-navlink > span::after { content: none; }
+.sw-navlink:hover { color: #E5322B; }
 
-/* Focus — sharp red ring, no glow */
+/* Focus — Stripe's soft brand halo */
 .ol-root a:focus-visible,
 .ol-root button:focus-visible,
 .ol-root input:focus-visible,
 .ol-root textarea:focus-visible,
 .ol-root select:focus-visible {
-  outline: 2px solid #E5322B;
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(229,50,43,.4);
+  border-radius: 6px;
+}
+
+/* keep the WhatsApp button clear of the mobile sticky CTA bar */
+@media (max-width: 920px) {
+  .wa-fab { bottom: 90px !important; right: 16px !important; height: 52px !important; }
+  .wa-fab > span:first-child { width: 52px !important; height: 52px !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
   .ol-reveal { opacity: 1 !important; }
-  .sw-navlink:hover > span { transform: none; }
 }

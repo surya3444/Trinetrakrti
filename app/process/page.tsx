@@ -19,24 +19,24 @@ export default function Process() {
   return (
     <main>
       <PageHero num="01" eyebrow="How it works" title={<>Problem to working<br />system, in five steps.</>} sub="A loop you can see, not a black box. Every step has one job and ends with something real you can hold." />
-      <section style={{ padding: "44px 0 90px" }}>
+      <section style={{ padding: "72px 0 90px" }}>
         <Container>
-          <div style={{ borderTop: `2px solid ${T.fg}` }}>
+          <div style={{ display: "grid", gap: 16 }}>
             {PHASES.map((p, i) => (
-              <div key={p.k} className="ol-reveal ol-phase" data-delay={i * 70} style={{ display: "grid", gridTemplateColumns: "auto 1fr auto", gap: 26, padding: "30px 16px", borderBottom: `2px solid ${T.fg}`, alignItems: "start" }}>
-                <div style={{ width: 56, height: 56, background: T.fg, color: "#fff", display: "grid", placeItems: "center", flexShrink: 0 }}>
-                  <span className="ol-mono" style={{ fontSize: 18, fontWeight: 800 }}>{i + 1}</span>
+              <div key={p.k} className="ol-reveal ol-phase" data-delay={i * 70} style={{ display: "grid", gridTemplateColumns: "auto 1fr auto", gap: 26, padding: "28px 28px", border: `1px solid ${T.border}`, borderRadius: T.radius, background: "#fff", boxShadow: T.shadowCard, alignItems: "start" }}>
+                <div style={{ width: 52, height: 52, borderRadius: 14, background: T.accentGradient, color: "#fff", display: "grid", placeItems: "center", flexShrink: 0, boxShadow: "0 8px 18px rgba(229,50,43,.3)" }}>
+                  <span className="ol-mono" style={{ fontSize: 18, fontWeight: 700 }}>{i + 1}</span>
                 </div>
                 <div>
                   <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
-                    <h3 style={{ fontSize: "clamp(22px,3vw,30px)", margin: 0, fontWeight: 800, textTransform: "uppercase", letterSpacing: "-.02em" }}>{p.k}</h3>
+                    <h3 style={{ fontSize: "clamp(20px,2.6vw,27px)", margin: 0, fontWeight: 600, letterSpacing: "-.02em", color: T.fg }}>{p.k}</h3>
                     <span className="ol-mono" style={{ fontSize: 12, color: T.accent }}>{p.verb}</span>
                   </div>
                   <p style={{ margin: "10px 0 0", color: T.mute, fontSize: 16, lineHeight: 1.6, maxWidth: 620 }}>{p.d}</p>
                 </div>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "flex-end", maxWidth: 240 }} className="ol-phase-out">
                   {p.out.map((o) => (
-                    <span key={o} className="ol-mono" style={{ fontSize: 11, color: T.fg, border: `1px solid ${T.fg}`, padding: "6px 10px", letterSpacing: ".04em" }}>{o}</span>
+                    <span key={o} style={{ fontSize: 12.5, fontWeight: 500, color: T.mute, background: T.muted, borderRadius: 999, padding: "6px 12px" }}>{o}</span>
                   ))}
                 </div>
               </div>

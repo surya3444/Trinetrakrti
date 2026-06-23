@@ -1,32 +1,51 @@
-// Trinetrakrti — Swiss International Typographic Style tokens.
-// Brand-adapted: logo red accent + logo navy as near-black, on pure white.
+// Trinetrakrti — Stripe-inspired design tokens.
+// Same brand palette (logo navy + logo red on white), expressed in Stripe's
+// visual language: soft surfaces, layered shadows, rounded geometry, gradients.
 const bg = "#FFFFFF";
-const fg = "#17222F"; // near-black navy — text + visible borders
-const muted = "#F2F2F2"; // secondary background blocks
-const accent = "#E5322B"; // the only signal color
+const fg = "#17222F"; // logo navy — headings + dark surfaces
+const muted = "#F6F9FC"; // Stripe's signature off-white section wash
+const accent = "#E5322B"; // brand red — the signal color
 
 export const T = {
-  // semantic (Swiss)
+  // semantic
   bg,
   fg,
   muted,
   accent,
-  // legacy aliases (kept so every component resolves to a Swiss value)
+  // text
+  ink: fg,
+  ink70: "#3C4452",
+  mute: "#525F7F", // Stripe body-copy slate
+  faint: "#8792A2",
+  // surfaces & lines
   paper: bg,
   panel: bg,
   wash: muted,
-  ink: fg,
-  ink70: "#2E3744",
-  mute: "#5A6473",
-  faint: "#9AA0AD",
-  line: fg,
-  line2: fg,
+  border: "#E6EBF1", // hairline card/section border
+  borderSoft: "#EDF1F6",
+  // accents (kept as aliases so existing references resolve to brand values)
+  line: "#E6EBF1",
+  line2: "#E6EBF1",
   blue: accent,
   blueSoft: accent,
   blueWash: muted,
   coral: accent,
-  coralWash: muted,
+  coralWash: "#FDECEB",
   green: fg,
+  // Stripe-style geometry
+  radius: 16,
+  radiusSm: 10,
+  radiusPill: 999,
+  // layered "floating" shadows (Stripe's depth model)
+  shadowBtn: "0 4px 8px rgba(50,50,93,.10), 0 1px 3px rgba(0,0,0,.08)",
+  shadowCard: "0 2px 5px -1px rgba(50,50,93,.20), 0 1px 3px -1px rgba(0,0,0,.10)",
+  shadowFloat: "0 15px 35px rgba(50,50,93,.10), 0 5px 15px rgba(0,0,0,.06)",
+  shadowHover: "0 18px 40px rgba(50,50,93,.16), 0 8px 16px rgba(0,0,0,.06)",
+  // gradients — derived strictly from navy + red so the palette is preserved
+  heroGradient:
+    "linear-gradient(150deg, #1A2536 0%, #243349 22%, #5A2A3B 55%, #B22F2C 80%, #E5322B 100%)",
+  accentGradient: "linear-gradient(180deg, #F0463E 0%, #E5322B 100%)",
+  darkGradient: "linear-gradient(160deg, #1B2738 0%, #17222F 60%, #101822 100%)",
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -42,6 +61,10 @@ export const BRAND = {
   url: "https://trinetrakrti.com",
   description:
     "We build websites, apps, AI automations & internal tools — around how your business actually works.",
+  // WhatsApp click-to-chat. Replace with the real business number in full
+  // international format, digits only (country code + number, no +/spaces).
+  whatsapp: "919000000000",
+  whatsappMessage: "Hi Trinetrakrti — I'd like to talk about a project.",
 } as const;
 
 export interface NavItem {
