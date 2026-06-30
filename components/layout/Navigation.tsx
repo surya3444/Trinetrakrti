@@ -35,7 +35,7 @@ export function Navbar() {
               </Link>
             );
           })}
-          <Btn variant="coral" onClick={() => router.push("/book")} style={{ padding: "10px 18px", minHeight: 0, fontSize: 14.5 }}>Book a call <ArrowR s={15} /></Btn>
+          <Btn variant="coral" onClick={() => router.push("/book")} style={{ padding: "10px 18px", minHeight: 0, fontSize: 14.5, background: T.maroonGradient }}>Contact us <ArrowR s={15} /></Btn>
         </nav>
 
         {/* Mobile burger */}
@@ -55,7 +55,7 @@ export function Navbar() {
               <ArrowR s={15} />
             </Link>
           ))}
-          <Btn variant="coral" onClick={() => router.push("/book")} style={{ marginTop: 18, width: "100%" }}>Book a call <ArrowR /></Btn>
+          <Btn variant="coral" onClick={() => router.push("/book")} style={{ marginTop: 18, width: "100%", background: T.maroonGradient }}>Contact us <ArrowR /></Btn>
         </Container>
       </div>
       <style>{`@media(max-width:920px){.ol-dnav{display:none !important;}.ol-burg{display:block !important;}}`}</style>

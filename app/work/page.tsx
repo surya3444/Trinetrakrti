@@ -2,7 +2,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { useReveal } from "@/hooks/useReveal";
-import { T, SERVICES } from "@/lib/theme";
+import { T, ALL_SERVICES, ServiceItem } from "@/lib/theme";
 import { Container, BuildIcon, ArrowR } from "@/components/ui/Shared";
 import { PageHero, FinalCTA } from "@/components/sections/SharedSections";
 
@@ -11,12 +11,12 @@ export default function Work() {
   const router = useRouter();
   return (
     <main>
-      <PageHero num="01" eyebrow="What we build" title={<>The capabilities<br />we lead with.</>} sub="Pick the thing you need, or let us figure out the right mix on a call. Either way, it's one team building one connected system." />
+      <PageHero eyebrow="What we build" title={<>Everything we build,<br />in one place.</>} sub="The full range of what we design and engineer. Pick the thing you need to see how we approach it — or let us figure out the right mix on a call." />
       <section style={{ padding: "80px 0" }}>
         <Container>
           <div style={{ display: "grid", gap: 14 }}>
-            {SERVICES.map((s, i) => (
-              <Row key={s.id} s={s} i={i} onClick={() => router.push("/book")} />
+            {ALL_SERVICES.map((s, i) => (
+              <Row key={s.id} s={s} i={i} onClick={() => router.push(`/work/${s.id}`)} />
             ))}
           </div>
         </Container>
@@ -26,7 +26,7 @@ export default function Work() {
   );
 }
 
-function Row({ s, i, onClick }: { s: typeof SERVICES[number]; i: number; onClick: () => void }) {
+function Row({ s, i, onClick }: { s: ServiceItem; i: number; onClick: () => void }) {
   const [h, setH] = React.useState(false);
   return (
     <div className="ol-reveal ol-frame" data-delay={(i % 8) * 40} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)} onClick={onClick}

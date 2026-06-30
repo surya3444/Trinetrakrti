@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useReveal } from "@/hooks/useReveal";
 import { T, SERVICES } from "@/lib/theme";
-import { Container, SectionHead, ArrowR, Check, Btn, Rotator, CountUp, ServiceCard, GeoComposition } from "@/components/ui/Shared";
+import { Container, SectionHead, ArrowR, Check, Btn, Rotator, CountUp, BuildIcon, GeoComposition } from "@/components/ui/Shared";
 import { Testimonials, FAQ, FinalCTA } from "@/components/sections/SharedSections";
 
 export default function Home() {
@@ -69,10 +69,10 @@ export default function Home() {
       {/* SERVICES */}
       <section style={{ padding: "100px 0 96px" }}>
         <Container>
-          <SectionHead num="02" eyebrow="Services" title="What we build." sub="One team, focused on the capabilities we lead with — custom software, AI, data, web and apps. Pick what you need, or let us figure out the right mix on a call." />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20, marginTop: 46 }} className="ol-svc-grid">
+          <SectionHead eyebrow="Services" title="What we build." sub="One team, focused on the capabilities we lead with — custom software, AI, data, web and apps. Pick what you need, or let us figure out the right mix on a call." />
+          <div className="ol-bento" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gridAutoRows: "minmax(188px, 1fr)", gap: 16, marginTop: 46 }}>
             {SERVICES.map((s, i) => (
-              <ServiceCard key={s.id} s={s} i={i} onClick={() => router.push("/book")} />
+              <BentoCard key={s.id} s={s} i={i} onClick={() => router.push(`/work/${s.id}`)} />
             ))}
           </div>
         </Container>
@@ -136,9 +136,9 @@ export default function Home() {
       <FAQ />
       <FinalCTA />
       <style>{`
-        @media(max-width:980px){.ol-svc-grid{grid-template-columns:repeat(2,1fr) !important;}}
         @media(max-width:900px){.ol-hero-grid{grid-template-columns:1fr !important;}.ol-hero-geo{display:none !important;}.ol-hero-ribbon{width:78% !important;opacity:.42 !important;}.ol-stat-grid{grid-template-columns:1fr !important;}}
-        @media(max-width:600px){.ol-svc-grid{grid-template-columns:1fr !important;}.ol-prob{grid-template-columns:1fr !important;gap:10px !important;}}
+        @media(max-width:820px){.ol-bento{grid-template-columns:1fr 1fr !important;grid-auto-rows:minmax(180px,auto) !important;}.ol-bento-card{grid-column:auto !important;grid-row:auto !important;}.ol-bento-card:first-child{grid-column:1 / -1 !important;}}
+        @media(max-width:560px){.ol-bento{grid-template-columns:1fr !important;}.ol-prob{grid-template-columns:1fr !important;gap:10px !important;}}
       `}</style>
     </main>
   );
@@ -194,19 +194,86 @@ function HeroPanel() {
 }
 
 function BuildPipeline() {
-  const stages = [{ k: "Understand", d: "We learn your business" }, { k: "Design", d: "We shape the right fix" }, { k: "Build", d: "Website · app · tool" }, { k: "Automate", d: "AI does the busywork" }, { k: "Scale", d: "It grows with you" }];
+  const stages = [
+    { k: "Understand", d: "We learn your business", long: "Before a single line of code, we sit with how your business actually runs — the workflows, the bottlenecks, the hand-offs that quietly eat time. We pressure-test what you think you need against what the work really demands, so we solve the root problem, not the symptom." },
+    { k: "Design", d: "We shape the right fix", long: "We map the solution end to end — the flows, the screens, the logic of how everything connects. You see and approve the plan before we build it, so there are no surprises and every decision is made on purpose, not by accident." },
+    { k: "Build", d: "Website · app · tool", long: "One team engineers the whole thing — website, app, internal tool or platform — built MVP-first so you get a real, working version in front of users in weeks, not quarters. Clean architecture that scales calmly instead of buckling later." },
+    { k: "Automate", d: "AI does the busywork", long: "We wire in AI and automations to handle the repetitive work your team shouldn't be doing — data entry, routing, reporting, follow-ups. The system does the busywork in the background so your people spend their time on what actually moves the business." },
+    { k: "Scale", d: "It grows with you", long: "We don't hand off and vanish. We monitor, iterate and re-architect as you grow, so each new customer adds revenue instead of friction. The system keeps getting faster, calmer and more capable alongside the business." },
+  ];
+  const [active, setActive] = useState<number | null>(null);
+  const cur = active !== null ? stages[active] : null;
   return (
     <div className="ol-reveal" data-delay="300" style={{ marginTop: 56, marginBottom: 56 }}>
-      <div className="ol-pipe" style={{ display: "flex", alignItems: "stretch", background: "#fff", border: `1px solid ${T.border}`, borderRadius: T.radius, overflowX: "auto", boxShadow: T.shadowFloat }}>
-        {stages.map((s, i) => (
-          <div key={s.k} style={{ flex: "1 1 0", minWidth: 150, padding: "22px 20px", borderLeft: i ? `1px solid ${T.border}` : "none" }}>
-            <div className="ol-mono" style={{ fontSize: 11.5, color: T.accent, marginBottom: 10, fontWeight: 700 }}>0{i + 1}</div>
-            <div style={{ fontWeight: 600, fontSize: 15.5, color: T.fg }}>{s.k}</div>
-            <div style={{ color: T.mute, fontSize: 13.5, marginTop: 4 }}>{s.d}</div>
-          </div>
-        ))}
+      <div className="ol-pipe" onMouseLeave={() => setActive(null)} style={{ display: "flex", alignItems: "stretch", background: "#fff", border: `1px solid ${T.border}`, borderRadius: T.radius, overflow: "hidden", boxShadow: T.shadowFloat }}>
+        {stages.map((s, i) => {
+          const on = active === i;
+          return (
+            <div key={s.k} onMouseEnter={() => setActive(i)} onClick={() => setActive(on ? null : i)}
+              style={{ flex: "1 1 0", minWidth: 150, padding: "22px 20px", borderLeft: i ? `1px solid ${T.border}` : "none", cursor: "pointer", background: on ? T.coralWash : "#fff", transition: "background .2s ease", position: "relative" }}>
+              <div className="ol-mono" style={{ fontSize: 11.5, color: T.accent, marginBottom: 10, fontWeight: 700 }}>0{i + 1}</div>
+              <div style={{ fontWeight: 600, fontSize: 15.5, color: on ? T.accent : T.fg, transition: "color .2s ease" }}>{s.k}</div>
+              <div style={{ color: T.mute, fontSize: 13.5, marginTop: 4 }}>{s.d}</div>
+              {on && <div aria-hidden style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 3, background: T.accentGradient }} />}
+            </div>
+          );
+        })}
       </div>
-      <style>{`@media(max-width:760px){.ol-pipe{justify-content:flex-start;}}`}</style>
+      {cur && (
+        <div key={active} style={{ marginTop: 14, padding: "22px 26px", background: "#fff", border: `1px solid ${T.border}`, borderRadius: T.radius, boxShadow: T.shadowCard, animation: "ol-fade .3s ease" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+            <span className="ol-mono" style={{ fontSize: 11.5, color: T.accent, fontWeight: 700 }}>0{active! + 1}</span>
+            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700, letterSpacing: "-.015em", color: T.fg }}>{cur.k}</h3>
+          </div>
+          <p style={{ margin: 0, color: T.mute, fontSize: 15.5, lineHeight: 1.6, maxWidth: 820 }}>{cur.long}</p>
+        </div>
+      )}
+      <style>{`@media(max-width:760px){.ol-pipe{justify-content:flex-start;overflow-x:auto;}}`}</style>
+    </div>
+  );
+}
+
+// Bento visual config per card position. The first card is the large dark
+// "feature" tile; the rest are light tiles with a soft tinted gradient + a
+// large watermark icon standing in for background imagery.
+const BENTO: { col: string; row: string; dark?: boolean; bg: string; glow: string }[] = [
+  { col: "1 / 3", row: "1 / 3", dark: true, bg: T.heroGradient, glow: "radial-gradient(70% 60% at 80% 12%, rgba(229,50,43,.5), transparent 70%)" },
+  { col: "3", row: "1", bg: "linear-gradient(150deg, #FFFFFF 0%, #FDECEB 100%)", glow: "radial-gradient(80% 70% at 90% 10%, rgba(229,50,43,.16), transparent 70%)" },
+  { col: "3", row: "2", bg: "linear-gradient(150deg, #FFFFFF 0%, #EEF2F7 100%)", glow: "radial-gradient(80% 70% at 90% 10%, rgba(23,34,47,.10), transparent 70%)" },
+  { col: "1", row: "3", bg: "linear-gradient(150deg, #FFFFFF 0%, #EEF2F7 100%)", glow: "radial-gradient(80% 70% at 90% 10%, rgba(23,34,47,.10), transparent 70%)" },
+  { col: "2", row: "3", bg: "linear-gradient(150deg, #FFFFFF 0%, #FDECEB 100%)", glow: "radial-gradient(80% 70% at 90% 10%, rgba(229,50,43,.16), transparent 70%)" },
+  { col: "3", row: "3", bg: "linear-gradient(150deg, #FFFFFF 0%, #FDECEB 100%)", glow: "radial-gradient(80% 70% at 90% 10%, rgba(229,50,43,.16), transparent 70%)" },
+];
+
+function BentoCard({ s, i, onClick }: { s: typeof SERVICES[number]; i: number; onClick: () => void }) {
+  const [h, setH] = useState(false);
+  const cfg = BENTO[i] ?? BENTO[0];
+  const dark = !!cfg.dark;
+  const fg = dark ? "#fff" : T.fg;
+  const mute = dark ? "rgba(255,255,255,.78)" : T.mute;
+  const accent = dark ? "#FFD7C2" : T.accent;
+  return (
+    <div className="ol-bento-card ol-reveal" data-delay={(i % 6) * 50} onClick={onClick}
+      onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
+      style={{ gridColumn: cfg.col, gridRow: cfg.row, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: dark ? "flex-end" : "flex-start", padding: dark ? "30px 30px" : "24px 24px", border: `1px solid ${dark ? "transparent" : T.border}`, borderRadius: T.radius, cursor: "pointer", background: cfg.bg, color: fg, boxShadow: h ? T.shadowFloat : T.shadowCard, transform: h ? "translateY(-4px)" : "none", transition: "transform .2s ease, box-shadow .2s ease" }}>
+      {/* background imagery layers */}
+      <div aria-hidden style={{ position: "absolute", inset: 0, background: cfg.glow, pointerEvents: "none" }} />
+      <div aria-hidden className={dark ? "st-grid-overlay" : "sw-dots"} style={{ position: "absolute", inset: 0, opacity: dark ? 1 : .5, pointerEvents: "none" }} />
+      {/* watermark icon */}
+      <span aria-hidden style={{ position: "absolute", right: dark ? -20 : -14, bottom: dark ? -24 : -16, opacity: dark ? .14 : .07, transform: h ? "scale(1.06) rotate(-4deg)" : "scale(1)", transition: "transform .3s ease", pointerEvents: "none" }}>
+        <BuildIcon name={s.icon} c={dark ? "#fff" : T.fg} />
+      </span>
+      {/* content */}
+      <div style={{ position: "relative", flex: dark ? "0 0 auto" : 1, display: "flex", flexDirection: "column" }}>
+        <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: dark ? 52 : 44, height: dark ? 52 : 44, borderRadius: 12, background: dark ? "rgba(255,255,255,.14)" : T.coralWash, border: dark ? "1px solid rgba(255,255,255,.2)" : "none", marginBottom: dark ? 18 : 16 }}>
+          <BuildIcon name={s.icon} c={dark ? "#fff" : T.accent} />
+        </span>
+        <h3 style={{ fontSize: dark ? "clamp(24px,3vw,32px)" : 19, margin: 0, fontWeight: 700, letterSpacing: "-.02em", lineHeight: 1.12 }}>{s.t}</h3>
+        <p style={{ margin: "10px 0 0", color: mute, fontSize: dark ? 16 : 14.5, lineHeight: 1.55, maxWidth: dark ? 420 : "none", flex: dark ? "0 0 auto" : 1 }}>{s.d}</p>
+        <div style={{ marginTop: dark ? 22 : 16, display: "inline-flex", alignItems: "center", gap: 7, color: accent, fontSize: 14, fontWeight: 600 }}>
+          Learn more <span style={{ display: "inline-flex", transform: h ? "translateX(4px)" : "none", transition: "transform .2s ease" }}><ArrowR s={15} /></span>
+        </div>
+      </div>
     </div>
   );
 }

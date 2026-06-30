@@ -7,9 +7,8 @@ export const Container: React.FC<{ children: React.ReactNode; style?: React.CSSP
 );
 
 // Stripe eyebrow: small, uppercase, tracked, brand-coloured.
-export const Eyebrow: React.FC<{ children: React.ReactNode; color?: string; num?: string }> = ({ children, color = T.accent, num }) => (
+export const Eyebrow: React.FC<{ children: React.ReactNode; color?: string; num?: string }> = ({ children, color = T.accent }) => (
   <span className="ol-mono" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, letterSpacing: ".09em", color, fontWeight: 600 }}>
-    {num && <span style={{ fontWeight: 700, opacity: .65 }}>{num}</span>}
     {children}
   </span>
 );
