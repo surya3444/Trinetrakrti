@@ -83,6 +83,7 @@ export const BRAND = {
 export interface NavItem {
   to: string;
   label: string;
+  subLinks?: NavItem[];
 }
 
 export const NAV: NavItem[] = [
@@ -93,7 +94,14 @@ export const NAV: NavItem[] = [
   { to: "/results", label: "Results" },
   { to: "/process", label: "How it works" },
   { to: "/pricing", label: "Pricing" },
-  { to: "/about", label: "About" },
+  {
+    to: "/about-us",
+    label: "About",
+    subLinks: [
+      { to: "/about-us", label: "About Company" },
+      { to: "/leadership", label: "About Leadership" },
+    ],
+  },
 ];
 
 export type IconName =

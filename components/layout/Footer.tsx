@@ -51,7 +51,7 @@ export function Footer() {
           {/* Explore */}
           <div className="ol-fcol">
             <div className="ol-mono" style={{ fontSize: 12, letterSpacing: ".1em", color: "rgba(255,255,255,.4)", marginBottom: 18 }}>Explore</div>
-            {[...NAV, { to: "/careers", label: "Careers" }, { to: "/book", label: "Book a call" }].map((n) => <Link key={n.to} href={n.to} style={{ display: "block", color: "rgba(255,255,255,.66)", padding: "7px 0", fontSize: 14.5, fontWeight: 500, transition: "color .15s ease" }} onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")} onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,.66)")}>{n.label}</Link>)}
+            {[...NAV, { to: "/leadership", label: "Leadership" }, { to: "/careers", label: "Careers" }, { to: "/book", label: "Book a call" }].map((n) => <Link key={n.to} href={n.to} style={{ display: "block", color: "rgba(255,255,255,.66)", padding: "7px 0", fontSize: 14.5, fontWeight: 500, transition: "color .15s ease" }} onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")} onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,.66)")}>{n.label}</Link>)}
           </div>
 
           {/* Contact Info */}
