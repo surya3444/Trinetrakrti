@@ -24,7 +24,7 @@ export function Navbar() {
     <header style={{ position: "sticky", top: 0, zIndex: 50, background: scrolled ? "rgba(255,255,255,.85)" : "rgba(255,255,255,.7)", backdropFilter: "saturate(180%) blur(12px)", WebkitBackdropFilter: "saturate(180%) blur(12px)", borderBottom: `1px solid ${scrolled ? T.border : "transparent"}`, boxShadow: scrolled ? "0 4px 20px rgba(50,50,93,.06)" : "none", transition: "all .25s ease" }}>
       <Container style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: scrolled ? 62 : 76, transition: "height .25s ease" }}>
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <img style={{ width: scrolled ? "120px" : "146px", transition: "width .25s ease" }} src="/tot2.svg" alt="Trinetrakrti" />
+          <img style={{ width: scrolled ? "120px" : "146px", transition: "width .25s ease" }} src="/tot-new.png" alt="Trinetrakrti" />
         </Link>
         <nav className="ol-dnav" style={{ display: "flex", alignItems: "center", gap: 30 }}>
           {NAV.slice(1).map((n) => {

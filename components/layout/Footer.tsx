@@ -26,7 +26,7 @@ export function Footer() {
         {/* Brand + CTA row */}
         <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr", gap: 48, padding: "72px 0 40px" }} className="ol-fg">
           <div className="ol-fcol">
-            <img style={{ width: "150px", marginBottom: 20 }} src="/tot1.svg" alt="Trinetrakrti" />
+            <img style={{ width: "150px", marginBottom: 20 }} src="/tot-new.png" alt="Trinetrakrti" />
             <p style={{ color: "rgba(255,255,255,.6)", maxWidth: 330, lineHeight: 1.7, fontSize: 15.5, margin: 0 }}>We build websites, apps, AI automations and internal tools — around how your business actually works.</p>
             <div className="ol-mono" style={{ marginTop: 22, fontSize: 12.5, letterSpacing: ".08em", color: "#FF8A78" }}>Find the fix. Build the system.</div>
           </div>
