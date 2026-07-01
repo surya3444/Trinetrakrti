@@ -22,6 +22,7 @@ export default function Work() {
         </Container>
       </section>
       <FinalCTA />
+      <style>{`@media(max-width:560px){.ol-row{grid-template-columns:auto 1fr !important;gap:16px !important;padding:20px !important;}.ol-row-num,.ol-row-arrow{display:none !important;}}`}</style>
     </main>
   );
 }
@@ -29,15 +30,15 @@ export default function Work() {
 function Row({ s, i, onClick }: { s: ServiceItem; i: number; onClick: () => void }) {
   const [h, setH] = React.useState(false);
   return (
-    <div className="ol-reveal ol-frame" data-delay={(i % 8) * 40} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)} onClick={onClick}
+    <div className="ol-reveal ol-frame ol-row" data-delay={(i % 8) * 40} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)} onClick={onClick}
       style={{ display: "grid", gridTemplateColumns: "auto auto 1fr auto", gap: 24, padding: "24px 26px", border: `1px solid ${T.border}`, borderRadius: T.radius, alignItems: "center", cursor: "pointer", background: "#fff", color: T.fg, boxShadow: h ? T.shadowFloat : T.shadowCard, transform: h ? "translateY(-3px)" : "none" }}>
-      <span className="ol-mono" style={{ fontSize: 13, fontWeight: 700, color: T.faint, width: 26 }}>{`0${i + 1}`.slice(-2)}</span>
+      <span className="ol-mono ol-row-num" style={{ fontSize: 13, fontWeight: 700, color: T.faint, width: 26 }}>{`0${i + 1}`.slice(-2)}</span>
       <div style={{ width: 50, height: 50, borderRadius: 12, background: T.coralWash, display: "grid", placeItems: "center", flexShrink: 0 }}><BuildIcon name={s.icon} c={T.accent} /></div>
       <div>
         <h3 style={{ fontSize: "clamp(19px,2.4vw,25px)", margin: 0, fontWeight: 600, letterSpacing: "-.02em", lineHeight: 1.1 }}>{s.t}</h3>
         <p style={{ margin: "7px 0 0", color: T.mute, fontSize: 15, lineHeight: 1.5, maxWidth: 640 }} className="ol-row-desc">{s.d}</p>
       </div>
-      <span style={{ color: T.accent, display: "inline-flex", transform: h ? "translateX(4px)" : "none", transition: "transform .2s ease" }}><ArrowR s={22} /></span>
+      <span className="ol-row-arrow" style={{ color: T.accent, display: "inline-flex", transform: h ? "translateX(4px)" : "none", transition: "transform .2s ease" }}><ArrowR s={22} /></span>
     </div>
   );
 }

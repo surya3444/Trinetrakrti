@@ -113,7 +113,7 @@ function RoleCard({ r, i }: { r: Role; i: number }) {
           ))}
         </div>
       </div>
-      <a href={mailto} className="ol-role-apply ol-btn" style={{ justifySelf: "end", display: "inline-flex", alignItems: "center", gap: 8, background: T.accentGradient, color: "#fff", borderRadius: T.radiusPill, padding: "12px 22px", fontSize: 15, fontWeight: 600, whiteSpace: "nowrap", boxShadow: T.shadowBtn }}>
+      <a href={mailto} className="ol-role-apply ol-btn" style={{ justifySelf: "end", display: "inline-flex", alignItems: "center", gap: 8, background: T.maroonGradient, color: "#fff", borderRadius: T.radiusPill, padding: "12px 22px", fontSize: 15, fontWeight: 600, whiteSpace: "nowrap", boxShadow: T.shadowBtn }}>
         Apply <ArrowR s={16} />
       </a>
     </div>

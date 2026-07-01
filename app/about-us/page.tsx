@@ -129,7 +129,7 @@ export default function AboutUs() {
               <h3 style={{ fontSize: "clamp(22px,3vw,30px)", fontWeight: 700, letterSpacing: "-.025em", margin: "12px 0 8px", color: T.fg }}>Meet the team behind Trinetrakrti.</h3>
               <p style={{ margin: 0, color: T.mute, fontSize: 16, lineHeight: 1.6, maxWidth: 560 }}>Visionary expertise and deep industry knowledge, committed to driving innovation and delivering exceptional value.</p>
             </div>
-            <span className="ol-btn" style={{ justifySelf: "end", display: "inline-flex", alignItems: "center", gap: 8, background: T.accentGradient, color: "#fff", borderRadius: T.radiusPill, padding: "12px 22px", fontSize: 15, fontWeight: 600, whiteSpace: "nowrap", boxShadow: T.shadowBtn }}>
+            <span className="ol-btn" style={{ justifySelf: "end", display: "inline-flex", alignItems: "center", gap: 8, background: T.maroonGradient, color: "#fff", borderRadius: T.radiusPill, padding: "12px 22px", fontSize: 15, fontWeight: 600, whiteSpace: "nowrap", boxShadow: T.shadowBtn }}>
               Meet the team <ArrowR s={16} />
             </span>
           </Link>

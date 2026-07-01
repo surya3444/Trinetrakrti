@@ -25,8 +25,8 @@ export const Btn: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement> & { var
   const [h, setH] = useState(false);
   const base: React.CSSProperties = { display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "12px 22px", borderRadius: T.radiusPill, fontWeight: 600, fontSize: 15, letterSpacing: "-.01em", border: "1px solid transparent", fontFamily: "'Inter',sans-serif", whiteSpace: "nowrap", minHeight: 44, lineHeight: 1 };
   const palette: Record<Variant, { rest: React.CSSProperties; hover: React.CSSProperties }> = {
-    // brand red — Stripe's primary CTA energy
-    coral: { rest: { background: T.accentGradient, color: "#fff", boxShadow: T.shadowBtn }, hover: { transform: "translateY(-1px)", boxShadow: T.shadowHover } },
+    // brand maroon — Stripe's primary CTA energy
+    coral: { rest: { background: T.maroonGradient, color: "#fff", boxShadow: T.shadowBtn }, hover: { transform: "translateY(-1px)", boxShadow: T.shadowHover } },
     // navy solid — secondary strong action
     primary: { rest: { background: T.fg, color: "#fff", boxShadow: T.shadowBtn }, hover: { transform: "translateY(-1px)", boxShadow: T.shadowHover } },
     // quiet outline on light backgrounds

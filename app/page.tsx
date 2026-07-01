@@ -113,7 +113,7 @@ export default function Home() {
           <div className="ol-reveal" data-delay="100" style={{ marginTop: 44, border: `1px solid ${T.border}`, borderRadius: T.radius, overflow: "hidden", boxShadow: T.shadowFloat }}>
             <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr" }}>
               {["", "A typical agency", "Trinetrakrti"].map((h, i) => (
-                <div key={i} style={{ padding: "18px 24px", borderBottom: `1px solid ${T.border}`, background: i === 2 ? T.accent : i === 1 ? T.muted : "#fff", fontWeight: 600, fontSize: 14, color: i === 2 ? "#fff" : T.fg, borderLeft: i ? `1px solid ${i === 2 ? "rgba(255,255,255,.18)" : T.border}` : "none" }}>{h || " "}</div>
+                <div key={i} style={{ padding: "18px 24px", borderBottom: `1px solid ${T.border}`, background: i === 2 ? T.maroonGradient : i === 1 ? T.muted : "#fff", fontWeight: 600, fontSize: 14, color: i === 2 ? "#fff" : T.fg, borderLeft: i ? `1px solid ${i === 2 ? "rgba(255,255,255,.18)" : T.border}` : "none" }}>{h || " "}</div>
               ))}
               {[
                 ["Starts with", "Your spec", "Your problem"],
@@ -138,7 +138,7 @@ export default function Home() {
       <style>{`
         @media(max-width:900px){.ol-hero-grid{grid-template-columns:1fr !important;}.ol-hero-geo{display:none !important;}.ol-hero-ribbon{width:78% !important;opacity:.42 !important;}.ol-stat-grid{grid-template-columns:1fr !important;}}
         @media(max-width:820px){.ol-bento{grid-template-columns:1fr 1fr !important;grid-auto-rows:minmax(180px,auto) !important;}.ol-bento-card{grid-column:auto !important;grid-row:auto !important;}.ol-bento-card:first-child{grid-column:1 / -1 !important;}}
-        @media(max-width:560px){.ol-bento{grid-template-columns:1fr !important;}.ol-prob{grid-template-columns:1fr !important;gap:10px !important;}}
+        @media(max-width:560px){.ol-bento{grid-template-columns:1fr !important;}.ol-prob{grid-template-columns:1fr !important;gap:10px !important;}.ol-prob>div:nth-child(2){display:none !important;}}
       `}</style>
     </main>
   );
@@ -245,6 +245,18 @@ const BENTO: { col: string; row: string; dark?: boolean; bg: string; glow: strin
   { col: "3", row: "3", bg: "linear-gradient(150deg, #FFFFFF 0%, #FDECEB 100%)", glow: "radial-gradient(80% 70% at 90% 10%, rgba(229,50,43,.16), transparent 70%)" },
 ];
 
+// Relevant background photography per service (Unsplash, served via CSS bg so no
+// next/image remote config is needed). Keyed by service id, tinted + scrimmed
+// below so titles stay readable.
+const BENTO_IMG: Record<string, string> = {
+  software: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1100&q=70",
+  ai: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1100&q=70",
+  data: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1100&q=70",
+  web: "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1100&q=70",
+  app: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1100&q=70",
+  uiux: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1100&q=70",
+};
+
 function BentoCard({ s, i, onClick }: { s: typeof SERVICES[number]; i: number; onClick: () => void }) {
   const [h, setH] = useState(false);
   const cfg = BENTO[i] ?? BENTO[0];
@@ -257,6 +269,14 @@ function BentoCard({ s, i, onClick }: { s: typeof SERVICES[number]; i: number; o
       onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
       style={{ gridColumn: cfg.col, gridRow: cfg.row, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: dark ? "flex-end" : "flex-start", padding: dark ? "30px 30px" : "24px 24px", border: `1px solid ${dark ? "transparent" : T.border}`, borderRadius: T.radius, cursor: "pointer", background: cfg.bg, color: fg, boxShadow: h ? T.shadowFloat : T.shadowCard, transform: h ? "translateY(-4px)" : "none", transition: "transform .2s ease, box-shadow .2s ease" }}>
       {/* background imagery layers */}
+      {BENTO_IMG[s.id] && (
+        <>
+          <div aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: `url(${BENTO_IMG[s.id]})`, backgroundSize: "cover", backgroundPosition: "center", opacity: dark ? .5 : .4, transform: h ? "scale(1.05)" : "scale(1)", transition: "transform .4s ease", pointerEvents: "none" }} />
+          <div aria-hidden style={{ position: "absolute", inset: 0, pointerEvents: "none", background: dark
+            ? "linear-gradient(180deg, rgba(23,34,47,.45) 0%, rgba(23,34,47,.72) 55%, rgba(16,24,34,.92) 100%)"
+            : "linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.55) 45%, rgba(255,251,251,.82) 100%)" }} />
+        </>
+      )}
       <div aria-hidden style={{ position: "absolute", inset: 0, background: cfg.glow, pointerEvents: "none" }} />
       <div aria-hidden className={dark ? "st-grid-overlay" : "sw-dots"} style={{ position: "absolute", inset: 0, opacity: dark ? 1 : .5, pointerEvents: "none" }} />
       {/* watermark icon */}
