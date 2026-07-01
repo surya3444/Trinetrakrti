@@ -228,7 +228,7 @@ function BuildPipeline() {
           <p style={{ margin: 0, color: T.mute, fontSize: 15.5, lineHeight: 1.6, maxWidth: 820 }}>{cur.long}</p>
         </div>
       )}
-      <style>{`@media(max-width:760px){.ol-pipe{justify-content:flex-start;overflow-x:auto;}}`}</style>
+      <style>{`@media(max-width:760px){.ol-pipe{overflow-x:auto !important;overflow-y:hidden;justify-content:flex-start;-webkit-overflow-scrolling:touch;scrollbar-width:none;}.ol-pipe::-webkit-scrollbar{display:none;}.ol-pipe>div{flex:0 0 auto !important;min-width:180px;}}`}</style>
     </div>
   );
 }

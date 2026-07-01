@@ -87,9 +87,12 @@ export default function Leadership() {
       <section style={{ padding: "80px 0 0" }}>
         <Container>
           <div className="ol-reveal ol-frame" style={{ border: `1px solid ${T.border}`, borderRadius: 22, background: "#fff", boxShadow: T.shadowFloat, padding: "40px 40px 44px" }}>
-            <div style={{ borderBottom: `1px solid ${T.border}`, paddingBottom: 22, marginBottom: 26 }}>
-              <h2 style={{ margin: 0, fontSize: "clamp(26px,3.4vw,38px)", fontWeight: 700, letterSpacing: "-.03em", color: T.fg }}>Vinayak R Tirlapur</h2>
-              <p style={{ margin: "8px 0 0", fontSize: 18, fontWeight: 500, color: T.accent }}>Founder &amp; CEO, Trinetrakrti</p>
+            <div style={{ borderBottom: `1px solid ${T.border}`, paddingBottom: 22, marginBottom: 26, display: "flex", alignItems: "center", gap: 26, flexWrap: "wrap" }}>
+              <img src="/vinayak.jpeg" alt="Vinayak R Tirlapur" style={{ width: 112, height: 112, borderRadius: 20, objectFit: "cover", border: `1px solid ${T.border}`, boxShadow: T.shadowCard, flexShrink: 0 }} />
+              <div>
+                <h2 style={{ margin: 0, fontSize: "clamp(26px,3.4vw,38px)", fontWeight: 700, letterSpacing: "-.03em", color: T.fg }}>Vinayak R Tirlapur</h2>
+                <p style={{ margin: "8px 0 0", fontSize: 18, fontWeight: 500, color: T.accent }}>Founder &amp; CEO, Trinetrakrti</p>
+              </div>
             </div>
 
             <p style={{ fontSize: 18, lineHeight: 1.7, color: T.fg, margin: 0, fontWeight: 500 }}>
